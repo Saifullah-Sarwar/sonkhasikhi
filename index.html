@@ -1,0 +1,2151 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0284c7">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>আমার বাংলা বই - পাঠ ৪১ : সংখ্যা শিখি</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/pptxgenjs@3.12.0/dist/pptxgen.bundle.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Galada&family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+body{font-family:'Hind Siliguri',sans-serif;background:linear-gradient(135deg,#dbeafe 0%,#fef3c7 50%,#e0f2fe 100%);min-height:100vh;user-select:none;overflow-x:hidden;}
+.font-title{font-family:'Galada',cursive;}
+@keyframes float-g{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-8px) rotate(1.5deg)}}
+.animate-float{animation:float-g 3.5s infinite ease-in-out;}
+::-webkit-scrollbar{width:8px;height:8px}
+::-webkit-scrollbar-track{background:#dbeafe}
+::-webkit-scrollbar-thumb{background:#0284c7;border-radius:10px}
+
+/* Star bar */
+#starBar{position:fixed;top:14px;left:14px;z-index:80;display:flex;gap:8px;align-items:center;background:linear-gradient(135deg,#fbbf24,#f59e0b);color:#78350f;padding:8px 14px;border-radius:16px;font-weight:900;font-size:14px;box-shadow:0 8px 22px rgba(245,158,11,.5),0 0 0 3px rgba(255,255,255,.4);border:none;}
+#starBar .starIcon{font-size:20px;}
+#starBar .lvlBadge{background:#78350f;color:#fbbf24;padding:2px 8px;border-radius:10px;font-size:11px;}
+@media (max-width:480px){#starBar{font-size:12px;padding:6px 10px;top:10px;left:10px;} #starBar .starIcon{font-size:16px;}}
+
+#mascot{position:fixed;bottom:14px;left:14px;z-index:70;width:90px;height:90px;cursor:pointer;transition:all .3s;}
+#mascot .mascot-body{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:64px;filter:drop-shadow(0 6px 12px rgba(0,0,0,.25));transition:all .3s;}
+#mascot.happy .mascot-body{animation:happy-bounce .6s ease-in-out;}
+#mascot.sad .mascot-body{animation:sad-shake .5s ease-in-out;}
+#mascotBubble{position:fixed;bottom:110px;left:14px;z-index:71;background:#fff;border:3px solid #0284c7;border-radius:18px 18px 18px 4px;padding:10px 14px;font-weight:700;font-size:13px;color:#075985;max-width:200px;box-shadow:0 8px 22px rgba(2,132,199,.3);opacity:0;transform:translateY(10px);transition:all .3s;pointer-events:none;}
+#mascotBubble.show{opacity:1;transform:translateY(0);}
+@media (max-width:480px){#mascot{width:70px;height:70px;} #mascot .mascot-body{font-size:48px;} #mascotBubble{font-size:11px;max-width:150px;bottom:88px;}}
+
+@keyframes happy-bounce{0%,100%{transform:translateY(0) scale(1) rotate(0)}25%{transform:translateY(-20px) scale(1.15) rotate(-8deg)}50%{transform:translateY(0) scale(1.1) rotate(0)}75%{transform:translateY(-12px) scale(1.12) rotate(8deg)}}
+@keyframes sad-shake{0%,100%{transform:translateX(0) rotate(0)}25%{transform:translateX(-6px) rotate(-5deg)}50%{transform:translateX(6px) rotate(5deg)}75%{transform:translateX(-4px) rotate(-3deg)}}
+
+.confetti-piece{position:fixed;width:10px;height:14px;z-index:2000;pointer-events:none;border-radius:2px;}
+@keyframes firework-burst{0%{transform:scale(0);opacity:1}100%{transform:scale(3);opacity:0}}
+.firework{position:fixed;width:20px;height:20px;border-radius:50%;z-index:1999;pointer-events:none;animation:firework-burst .8s ease-out forwards;}
+
+.badge-item{background:linear-gradient(135deg,#fff,#f0f9ff);border:3px solid #cbd5e1;border-radius:16px;padding:12px;text-align:center;transition:all .3s;filter:grayscale(1);opacity:.45;position:relative;}
+.badge-item.unlocked{filter:grayscale(0);opacity:1;border-color:#f59e0b;box-shadow:0 8px 22px rgba(245,158,11,.35);animation:badge-pop .5s ease-in-out;}
+.badge-item .badge-emoji{font-size:42px;margin-bottom:6px;}
+.badge-item .badge-name{font-weight:900;font-size:12px;color:#78350f;}
+.badge-item .badge-desc{font-size:10px;color:#64748b;margin-top:2px;}
+@keyframes badge-pop{0%{transform:scale(.5) rotate(-15deg)}60%{transform:scale(1.15) rotate(8deg)}100%{transform:scale(1) rotate(0)}}
+
+.memory-card{aspect-ratio:1;perspective:800px;cursor:pointer;}
+.memory-card .mc-inner{position:relative;width:100%;height:100%;transition:transform .6s;transform-style:preserve-3d;}
+.memory-card.flipped .mc-inner{transform:rotateY(180deg);}
+.memory-card.matched .mc-inner{transform:rotateY(180deg);}
+.memory-card .mc-front,.memory-card .mc-back{position:absolute;inset:0;border-radius:16px;display:flex;align-items:center;justify-content:center;backface-visibility:hidden;-webkit-backface-visibility:hidden;font-size:40px;font-weight:900;border:3px solid;}
+.memory-card .mc-front{background:linear-gradient(135deg,#3b82f6,#1d4ed8);color:#fff;border-color:#1e40af;}
+.memory-card .mc-back{background:linear-gradient(135deg,#fef3c7,#fde68a);color:#78350f;border-color:#f59e0b;transform:rotateY(180deg);font-family:'Galada',cursive;}
+.memory-card.matched .mc-back{background:linear-gradient(135deg,#10b981,#059669);color:#fff;border-color:#065f46;animation:praise-b .5s;}
+
+/* ═══ TRACE FIXED ═══ */
+#traceCanvasWrap{position:relative;width:100%;max-width:420px;margin:0 auto;aspect-ratio:1/1;background:#fff;border-radius:24px;border:4px solid #0284c7;box-shadow:0 12px 30px rgba(2,132,199,.25);overflow:hidden;}
+#traceCanvas{display:block;width:100%;height:100%;touch-action:none;cursor:crosshair;}
+
+.opt-btn{padding:10px 18px;border-radius:14px;font-weight:900;font-size:18px;border:3px solid;cursor:pointer;transition:all .2s;min-width:60px;text-align:center;}
+.opt-btn:hover{transform:translateY(-3px) scale(1.05);}
+
+@keyframes praise-b{0%,100%{transform:scale(1)}50%{transform:scale(1.15) rotate(2deg)}}
+.animate-praise{animation:praise-b .6s ease-in-out;}
+@keyframes install-pulse{0%,100%{box-shadow:0 0 0 0 rgba(236,72,153,.7)}50%{box-shadow:0 0 0 10px rgba(236,72,153,0)}}
+.install-pulse{animation:install-pulse 2s infinite;}
+
+#settingsFab{position:fixed;top:14px;right:14px;z-index:80;width:52px;height:52px;border-radius:16px;background:linear-gradient(135deg,#0284c7,#0ea5e9);color:#fff;display:flex;align-items:center;justify-content:center;font-size:22px;box-shadow:0 8px 22px rgba(2,132,199,.5),0 0 0 3px rgba(255,255,255,.3);cursor:pointer;transition:all .3s;border:none;}
+#settingsFab:hover{transform:scale(1.08) rotate(6deg);}
+#settingsFab.open{background:linear-gradient(135deg,#dc2626,#f43f5e);transform:rotate(90deg);}
+#settingsFab .fab-badge{position:absolute;top:-4px;right:-4px;background:#f59e0b;color:#0f172a;font-size:9px;font-weight:900;padding:2px 6px;border-radius:8px;animation:install-pulse 2s infinite;}
+@media (max-width:480px){#settingsFab{width:46px;height:46px;top:10px;right:10px;font-size:19px;border-radius:14px;}}
+#drawerBackdrop{position:fixed;inset:0;z-index:75;background:rgba(15,23,42,.55);backdrop-filter:blur(4px);opacity:0;visibility:hidden;transition:opacity .3s,visibility .3s;}
+#drawerBackdrop.open{opacity:1;visibility:visible;}
+#settingsDrawer{position:fixed;top:0;right:0;bottom:0;width:min(340px,88vw);z-index:85;background:linear-gradient(180deg,#fff,#f0f9ff);box-shadow:-10px 0 40px rgba(2,132,199,.3);transform:translateX(105%);transition:transform .35s cubic-bezier(.4,0,.2,1);display:flex;flex-direction:column;overflow:hidden;}
+#settingsDrawer.open{transform:translateX(0);}
+@media (max-width:480px){#settingsDrawer{width:92vw;}}
+.drawer-head{background:linear-gradient(135deg,#0284c7,#0ea5e9,#38bdf8);color:#fff;padding:16px 18px;display:flex;align-items:center;justify-content:space-between;border-bottom:3px solid #f59e0b;flex-shrink:0;}
+.drawer-head h3{font-family:'Galada',cursive;font-size:20px;}
+.drawer-close{background:rgba(255,255,255,.2);border:none;color:#fff;width:36px;height:36px;border-radius:12px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:16px;}
+.drawer-close:hover{background:rgba(255,255,255,.35);transform:rotate(90deg);}
+.drawer-body{flex:1;overflow-y:auto;padding:16px 14px 20px;display:flex;flex-direction:column;gap:14px;}
+.drawer-section{background:#fff;border:2px solid #bae6fd;border-radius:16px;padding:12px;}
+.drawer-section-title{font-size:11px;font-weight:800;color:#0369a1;letter-spacing:1px;text-transform:uppercase;margin-bottom:9px;display:flex;align-items:center;gap:6px;}
+.drawer-btn{width:100%;display:flex;align-items:center;gap:10px;padding:11px 13px;border-radius:12px;font-weight:700;font-size:14px;cursor:pointer;border:none;text-align:left;transition:all .2s;margin-bottom:7px;color:#fff;}
+.drawer-btn:hover{transform:translateX(-3px);}
+.drawer-btn i{width:22px;text-align:center;font-size:16px;}
+.drawer-btn .btn-label{flex:1;}
+.btn-sky{background:linear-gradient(135deg,#0ea5e9,#0284c7);}
+.btn-emerald{background:linear-gradient(135deg,#16a34a,#15803d);}
+.btn-orange{background:linear-gradient(135deg,#f97316,#ea580c);}
+.btn-purple{background:linear-gradient(135deg,#9333ea,#7c3aed);}
+.btn-pink{background:linear-gradient(135deg,#ec4899,#db2777);}
+.btn-teal{background:linear-gradient(135deg,#14b8a6,#0d9488);}
+.btn-slate{background:linear-gradient(135deg,#475569,#334155);}
+.btn-red{background:linear-gradient(135deg,#dc2626,#b91c1c);}
+.drawer-select{width:100%;padding:10px 12px;border-radius:12px;background:#f0f9ff;border:2px solid #bae6fd;font-weight:700;font-size:14px;font-family:inherit;}
+.drawer-info{background:linear-gradient(135deg,#fef3c7,#fde68a);border:2px solid #f59e0b;border-radius:14px;padding:12px;text-align:center;}
+.drawer-info .nctb{display:inline-block;background:#0f172a;color:#fbbf24;font-weight:900;font-size:12px;padding:3px 12px;border-radius:10px;letter-spacing:1px;}
+.drawer-info p{font-size:10px;color:#78350f;font-weight:700;margin-top:6px;}
+.drawer-footer{flex-shrink:0;padding:12px 14px;background:linear-gradient(180deg,transparent,#dbeafe);border-top:1px solid #bae6fd;text-align:center;font-size:10px;color:#0369a1;font-weight:700;}
+
+#tabNav{display:flex;flex-wrap:wrap;gap:6px;padding:3px 2px 8px;}
+#tabNav .tab-btn{white-space:nowrap;flex-shrink:0;padding:8px 14px;border-radius:14px;font-size:13px;font-weight:700;cursor:pointer;border:2px solid transparent;transition:all .2s;color:#fff;}
+#tabNav .tab-btn:hover{transform:translateY(-2px);box-shadow:0 4px 10px rgba(0,0,0,.1);}
+#tabNav .tab-btn.active{background:#fff!important;color:#0284c7!important;box-shadow:0 4px 12px rgba(255,255,255,.5);}
+
+.section-view{display:none;}
+.section-view.active{display:block;}
+
+#zoomControls{position:fixed;bottom:20px;right:20px;z-index:70;display:flex;flex-direction:column;gap:6px;}
+#zoomControls button{width:44px;height:44px;border-radius:50%;border:none;background:linear-gradient(135deg,#0284c7,#0ea5e9);color:#fff;font-size:18px;box-shadow:0 6px 18px rgba(2,132,199,.4);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;}
+#zoomControls button:hover{transform:scale(1.1);}
+#zoomLevel{position:fixed;bottom:20px;right:70px;z-index:70;background:rgba(15,23,42,.8);color:#fff;padding:6px 12px;border-radius:20px;font-size:12px;font-weight:700;display:none;}
+#zoomLevel.show{display:block;}
+
+#nightSkyCanvas{display:block;width:100%;border-radius:24px;box-shadow:0 20px 50px rgba(0,0,0,.5);}
+#towerCanvas{display:block;width:100%;border-radius:24px;}
+
+.count-tap-card{border-radius:22px;padding:16px;background:linear-gradient(135deg,#fff,#f0f9ff);border:4px solid #0284c7;box-shadow:0 10px 28px rgba(2,132,199,.2);}
+.count-tap-area{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;align-items:center;min-height:120px;padding:16px;background:#f0f9ff;border-radius:16px;border:3px dashed #0284c7;margin-bottom:12px;}
+.count-emoji{font-size:36px;cursor:pointer;transition:all .2s;user-select:none;padding:4px;border-radius:10px;line-height:1;}
+.count-emoji:hover{transform:scale(1.15);}
+.count-emoji.tapped{opacity:.35;filter:grayscale(.7);transform:scale(.85);}
+.count-emoji.pulse{animation:praise-b .5s ease-in-out;}
+.count-num-btn{width:60px;height:60px;border-radius:16px;font-weight:900;font-size:22px;border:3px solid #0284c7;background:#fff;color:#0284c7;cursor:pointer;transition:all .2s;font-family:'Galada',cursive;}
+.count-num-btn:hover{transform:translateY(-3px) scale(1.06);background:#e0f2fe;}
+.count-num-btn.correct{background:#10b981!important;color:#fff!important;border-color:#047857!important;}
+.count-num-btn.wrong{background:#ef4444!important;color:#fff!important;border-color:#b91c1c!important;}
+
+.blank-box{width:70px;height:70px;border:3px dashed #0284c7;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:900;color:#0284c7;background:#f0f9ff;cursor:pointer;transition:all .25s;}
+.blank-box:hover{background:#e0f2fe;transform:scale(1.06);}
+.blank-box.filled{background:#e0f2fe;color:#0369a1;border:3px solid #0284c7;border-style:solid;}
+.blank-box.correct{background:#10b981;color:#fff;border:3px solid #047857;border-style:solid;}
+.blank-box.wrong{background:#ef4444;color:#fff;border:3px solid #b91c1c;border-style:solid;}
+
+@media print{
+  @page{size:A4 portrait;margin:1cm 1cm}
+  html,body{background:#fff!important;padding:0!important;margin:0!important}
+  *{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
+  #appContainer,#settingsFab,#drawerBackdrop,#settingsDrawer,#zoomControls,#zoomLevel,#starBar,#mascot,#mascotBubble{display:none!important}
+  .no-print{display:none!important}
+  #printModal,#installModal{display:none!important}
+  #printArea{display:block!important}
+  .pr-page{font-family:'Hind Siliguri',sans-serif;color:#0f172a;font-size:11pt;line-height:1.55}
+  .pr-head{text-align:center;border-bottom:3px solid #0284c7;padding-bottom:6px;margin-bottom:10px}
+  .pr-head h1{font-family:'Galada',cursive;font-size:20pt;color:#075985;margin:3px 0 5px 0}
+  .pr-kicker{font-size:9pt;font-weight:700;color:#0369a1;}
+  .pr-meta{display:flex;justify-content:space-between;gap:10px;font-size:9.5pt;font-weight:600;flex-wrap:wrap}
+  .pr-name{margin-top:5px;font-size:9.5pt;font-weight:600;text-align:left}
+  .pr-sec{margin-top:11px;page-break-inside:avoid}
+  .pr-sec>h2{font-size:12pt;color:#fff;background:#0284c7;padding:4px 9px;border-radius:5px;margin-bottom:7px;font-weight:700}
+  .pr-table{width:100%;border-collapse:collapse;margin-top:4px;font-size:10pt}
+  .pr-table th{background:#e0f2fe;color:#075985;border:1px solid #7dd3fc;padding:4px 6px;text-align:left;font-weight:700}
+  .pr-table td{border:1px solid #bae6fd;padding:4px 6px;font-weight:600}
+  .pr-foot{margin-top:14px;border-top:2px solid #cbd5e1;padding-top:5px;text-align:center;font-size:8pt;color:#64748b;font-weight:600}
+  .pr-pagebreak{page-break-before:always}
+  .pr-blank{display:inline-block;min-width:60px;border-bottom:1.5px solid #0f172a;height:14px;margin:0 6px;}
+  .pr-num-page{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:repeat(3,1fr);gap:8mm;height:277mm;padding:5mm;box-sizing:border-box;}
+  .pr-num-card{border:2.5px solid #0284c7;border-radius:14px;padding:6mm;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;background:linear-gradient(135deg,#f0f9ff,#e0f2fe);overflow:hidden;page-break-inside:avoid;}
+  .pr-num-card.odd{background:linear-gradient(135deg,#fef3c7,#fed7aa);border-color:#f59e0b;}
+  .pr-num-card .pr-corner-num{position:absolute;top:3mm;right:5mm;font-family:'Galada',cursive;font-size:36pt;color:#0284c7;line-height:1;opacity:.35;}
+  .pr-num-card.odd .pr-corner-num{color:#b45309;}
+  .pr-num-card .pr-big-num{font-family:'Galada',cursive;font-size:72pt;color:#075985;line-height:1;text-align:center;}
+  .pr-num-card.odd .pr-big-num{color:#92400e;}
+  .pr-num-card .pr-bn-word{font-size:22pt;font-weight:900;color:#0f172a;margin-top:2mm;text-align:center;}
+  .pr-num-card .pr-emoji-big{font-size:44pt;margin:2mm 0;text-align:center;line-height:1;}
+  .pr-num-card .pr-item-line{font-size:11pt;font-weight:800;color:#334155;text-align:center;background:rgba(255,255,255,.7);padding:1mm 4mm;border-radius:8px;margin-top:1mm;}
+  .pr-num-card .pr-decor-circle{position:absolute;bottom:-10mm;left:-10mm;width:30mm;height:30mm;border-radius:50%;background:rgba(255,255,255,.4);}
+
+  .pr-cert{width:100%;max-width:190mm;height:250mm;margin:0 auto;border:8px double #f59e0b;border-radius:18px;padding:14mm 12mm;text-align:center;background:linear-gradient(180deg,#fff,#fef3c7);position:relative;display:flex;flex-direction:column;justify-content:space-between;}
+  .pr-cert .cert-head{font-family:'Galada',cursive;font-size:36pt;color:#0284c7;margin:6mm 0 2mm 0;}
+  .pr-cert .cert-sub{font-size:13pt;color:#78350f;font-weight:700;}
+  .pr-cert .cert-line{margin:8mm 0 4mm 0;}
+  .pr-cert .cert-name{font-family:'Galada',cursive;font-size:32pt;color:#b45309;border-bottom:3px dashed #f59e0b;display:inline-block;padding:0 20mm 3mm 20mm;}
+  .pr-cert .cert-body{font-size:13pt;color:#0f172a;line-height:1.9;font-weight:600;}
+  .pr-cert .cert-stars{font-size:36pt;letter-spacing:8px;margin:4mm 0;}
+  .pr-cert .cert-foot{display:flex;justify-content:space-between;margin-top:10mm;font-size:11pt;color:#475569;}
+  .pr-cert .cert-seal{font-size:60pt;color:#f59e0b;}
+}
+</style>
+</head>
+<body class="p-2 sm:p-4 md:p-6 text-gray-800">
+
+<div id="starBar" title="তোমার তারা">
+  <span class="starIcon">⭐</span>
+  <span id="starCount">০</span>
+  <span class="lvlBadge">লেভেল <span id="lvlNum">১</span></span>
+</div>
+
+<button id="settingsFab" onclick="toggleDrawer()"><i class="fas fa-sliders" id="fabIcon"></i><span class="fab-badge">⚙️</span></button>
+<div id="drawerBackdrop" onclick="closeDrawer()"></div>
+
+<div id="mascot" onclick="mascotTap()"><div class="mascot-body" id="mascotBody">🐼</div></div>
+<div id="mascotBubble"></div>
+
+<aside id="settingsDrawer">
+  <div class="drawer-head">
+    <div><h3>⚙️ কন্ট্রোল প্যানেল</h3><p style="font-size:10px;opacity:.9;font-weight:600;margin-top:2px;">শব্দ, ডাউনলোড ও অন্যান্য</p></div>
+    <button class="drawer-close" onclick="closeDrawer()"><i class="fas fa-xmark"></i></button>
+  </div>
+  <div class="drawer-body">
+    <div class="drawer-section">
+      <div class="drawer-section-title"><i class="fas fa-trophy"></i> তোমার অর্জন</div>
+      <div style="background:linear-gradient(135deg,#fef3c7,#fde68a);border:2px solid #f59e0b;border-radius:14px;padding:12px;text-align:center;">
+        <div style="font-size:28px;">⭐ <span id="drawerStar">০</span></div>
+        <div style="font-size:11px;font-weight:800;color:#78350f;margin-top:4px;">লেভেল <span id="drawerLvl">১</span> • 🔥 স্ট্রিক <span id="drawerStreak">০</span> দিন</div>
+        <button onclick="showCertificate();closeDrawer();" style="margin-top:8px;background:linear-gradient(135deg,#f59e0b,#d97706);color:#fff;font-weight:900;padding:8px 16px;border-radius:12px;border:none;cursor:pointer;font-size:12px;width:100%;">📜 সার্টিফিকেট দেখো</button>
+      </div>
+    </div>
+    <div class="drawer-section">
+      <div class="drawer-section-title"><i class="fas fa-volume-high"></i> শব্দ ও ভয়েস</div>
+      <button class="drawer-btn btn-sky" onclick="toggleAudio();updateDrawerSound();"><i class="fas fa-volume-up" id="drawerSoundIcon"></i><span class="btn-label" id="drawerSoundText">শব্দ চালু আছে</span></button>
+      <button class="drawer-btn btn-red" onclick="stopAllSpeech();"><i class="fas fa-stop"></i><span class="btn-label">সব কথা বন্ধ করো</span></button>
+      <div style="margin-top:7px;">
+        <label style="font-size:11px;font-weight:800;color:#0369a1;display:block;margin-bottom:5px;">🎚️ পড়ার গতি</label>
+        <select id="speechRateSelect" onchange="changeSpeechRate(this.value)" class="drawer-select">
+          <option value="0.6">🐢 ধীরে</option>
+          <option value="0.8" selected>🚶 স্বাভাবিক</option>
+          <option value="1.0">🏃 দ্রুত</option>
+        </select>
+      </div>
+    </div>
+    <div class="drawer-section">
+      <div class="drawer-section-title"><i class="fas fa-file-export"></i> প্রিন্ট ও এক্সপোর্ট</div>
+      <button class="drawer-btn btn-emerald" onclick="openPrintModal();closeDrawer();"><i class="fas fa-print"></i><span class="btn-label">প্রিন্ট কার্যপত্র</span></button>
+      <button class="drawer-btn btn-orange" onclick="downloadPPT();"><i class="fas fa-file-powerpoint"></i><span class="btn-label" id="pptBtnText">পাওয়ারপয়েন্ট (PPT)</span></button>
+      <button class="drawer-btn btn-purple" onclick="downloadHTML();closeDrawer();"><i class="fas fa-download"></i><span class="btn-label">HTML ডাউনলোড</span></button>
+    </div>
+    <div class="drawer-section">
+      <div class="drawer-section-title"><i class="fas fa-mobile-screen"></i> অ্যাপ ইনস্টল</div>
+      <button id="installBtn" class="drawer-btn btn-pink install-pulse" onclick="handleInstallClick();"><i class="fas fa-circle-down"></i><span class="btn-label" id="installBtnText">কম্পিউটার/মোবাইলে ইনস্টল</span></button>
+    </div>
+    <div class="drawer-section">
+      <div class="drawer-section-title"><i class="fas fa-user-graduate"></i> শিশুর নাম</div>
+      <input type="text" id="childNameInput" placeholder="এখানে নাম লিখো..." maxlength="20" class="drawer-select" oninput="saveChildName(this.value)">
+      <div style="margin-top:7px;"><button class="drawer-btn btn-slate" style="margin-bottom:0;font-size:12px;padding:9px;" onclick="clearChildName();document.getElementById('childNameInput').value='';"><i class="fas fa-eraser"></i><span class="btn-label">নাম মুছো</span></button></div>
+    </div>
+    <div class="drawer-info"><span class="nctb">NCTB</span><p>জাতীয় শিক্ষাক্রম ও পাঠ্যপুস্তক বোর্ড<br>আমার বাংলা বই • প্রথম শ্রেণি</p></div>
+  </div>
+  <div class="drawer-footer">🎨 পরিকল্পনা ও ডিজাইনে: <strong>মো: সাইফুল্লাহ সরওয়ার</strong> ⭐</div>
+</aside>
+
+<div id="zoomControls">
+  <button onclick="zoomIn()" title="Zoom In"><i class="fas fa-search-plus"></i></button>
+  <button onclick="zoomOut()" title="Zoom Out"><i class="fas fa-search-minus"></i></button>
+  <button onclick="zoomReset()" title="Reset Zoom"><i class="fas fa-undo"></i></button>
+</div>
+<div id="zoomLevel">100%</div>
+
+<div id="appContainer" class="max-w-6xl mx-auto bg-white/95 backdrop-blur-md rounded-3xl shadow-2xl overflow-hidden border-4 border-sky-200">
+
+<header class="bg-gradient-to-r from-sky-600 via-cyan-600 to-blue-600 p-4 sm:p-6 text-white text-center relative overflow-hidden shadow-md">
+  <div class="absolute -top-6 -left-6 w-28 h-28 bg-white/10 rounded-full blur-xl"></div>
+  <div class="absolute -bottom-6 -right-6 w-36 h-36 bg-amber-300/20 rounded-full blur-xl"></div>
+  <div class="relative z-10 flex items-center justify-start gap-3 pr-16">
+    <span class="text-4xl sm:text-6xl animate-float">🔢</span>
+    <div class="text-left">
+      <div class="flex items-center gap-2 flex-wrap">
+        <span class="bg-amber-300 text-sky-950 text-xs font-black px-3 py-0.5 rounded-full uppercase tracking-wider">পাঠ ৪১</span>
+        <span class="text-xs text-sky-100 font-semibold">আমার বাংলা বই • ১ম শ্রেণি</span>
+        <span class="text-[10px] bg-white/20 px-2 py-0.5 rounded-full font-bold">পৃষ্ঠা ৯৪-৯৬</span>
+      </div>
+      <h1 class="text-3xl sm:text-5xl font-title text-amber-200 tracking-wide drop-shadow-md mt-0.5">সংখ্যা শিখি</h1>
+      <div id="headerGreeting" class="mt-2 inline-flex items-center gap-2 bg-gradient-to-r from-amber-400 via-pink-500 to-rose-500 text-white text-xs sm:text-sm font-black px-4 py-1 rounded-full shadow-lg border border-white/40">
+        <span>✨</span>
+        <span>পরিকল্পনা ও ডিজাইনে: <strong class="text-yellow-200 text-sm sm:text-base font-extrabold">মো: সাইফুল্লাহ সরওয়ার</strong></span>
+        <span>👑</span>
+      </div>
+    </div>
+  </div>
+
+  <nav id="tabNav" class="mt-5 border-t border-white/20 pt-3">
+    <button onclick="switchTab('lesson')" id="tab-lesson" class="tab-btn active bg-gradient-to-r from-orange-500 to-pink-500"><span>📖</span> পাঠ</button>
+    <button onclick="switchTab('numbers')" id="tab-numbers" class="tab-btn bg-gradient-to-r from-sky-500 to-cyan-500"><span>🔢</span> সংখ্যা</button>
+    <button onclick="switchTab('words')" id="tab-words" class="tab-btn bg-gradient-to-r from-pink-500 to-rose-500"><span>📚</span> শব্দ</button>
+    <button onclick="switchTab('trace')" id="tab-trace" class="tab-btn bg-gradient-to-r from-violet-500 to-purple-600"><span>✏️</span> আঁকা</button>
+    <button onclick="switchTab('quiz')" id="tab-quiz" class="tab-btn bg-gradient-to-r from-emerald-500 to-teal-500"><span>🎯</span> কুইজ</button>
+    <button onclick="switchTab('count')" id="tab-count" class="tab-btn bg-gradient-to-r from-cyan-500 to-blue-500"><span>🔍</span> গণনা</button>
+    <button onclick="switchTab('memory')" id="tab-memory" class="tab-btn bg-gradient-to-r from-fuchsia-500 to-pink-600"><span>🧠</span> মেমরি</button>
+    <button onclick="switchTab('blank')" id="tab-blank" class="tab-btn bg-gradient-to-r from-amber-500 to-orange-500"><span>🧩</span> ফাঁকা</button>
+    <button onclick="switchTab('night')" id="tab-night" class="tab-btn bg-gradient-to-r from-indigo-700 to-purple-800"><span>🌙</span> আকাশ</button>
+    <button onclick="switchTab('tower')" id="tab-tower" class="tab-btn bg-gradient-to-r from-rose-600 to-orange-600"><span>🏢</span> ভবন</button>
+    <button onclick="switchTab('badges')" id="tab-badges" class="tab-btn bg-gradient-to-r from-yellow-500 to-amber-600"><span>🏅</span> ব্যাজ</button>
+  </nav>
+</header>
+
+<main id="mainContent" class="p-3 sm:p-6 md:p-8">
+
+<!-- LESSON -->
+<section id="section-lesson" class="section-view active space-y-6">
+  <div class="bg-gradient-to-br from-sky-50 via-cyan-50 to-blue-50 rounded-3xl p-4 sm:p-6 border-4 border-sky-300 shadow-lg">
+    <h2 class="text-xl sm:text-2xl font-bold text-sky-900 flex items-center gap-2 font-title mb-4"><span>📖</span> পাঠ ৪১: সংখ্যা শিখি (১ থেকে ২০)</h2>
+    <p class="text-sm text-slate-700 font-semibold mb-4">🎉 স্বাগতম! আজ আমরা মজা করে ১ থেকে ২০ পর্যন্ত সংখ্যা শিখব। প্রতিটি কাজে তারা পাবে!</p>
+    <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+      <button onclick="switchTab('numbers')" class="bg-gradient-to-r from-sky-500 to-cyan-500 text-white p-3 sm:p-4 rounded-2xl font-black shadow-md hover:shadow-xl transition flex flex-col items-center gap-1"><span class="text-3xl">🔢</span><span class="text-xs sm:text-sm">সংখ্যা ১-২০</span></button>
+      <button onclick="switchTab('words')" class="bg-gradient-to-r from-pink-500 to-rose-500 text-white p-3 sm:p-4 rounded-2xl font-black shadow-md hover:shadow-xl transition flex flex-col items-center gap-1"><span class="text-3xl">📚</span><span class="text-xs sm:text-sm">শব্দ শিখি</span></button>
+      <button onclick="switchTab('trace')" class="bg-gradient-to-r from-violet-500 to-purple-600 text-white p-3 sm:p-4 rounded-2xl font-black shadow-md hover:shadow-xl transition flex flex-col items-center gap-1"><span class="text-3xl">✏️</span><span class="text-xs sm:text-sm">সংখ্যা আঁকা</span></button>
+      <button onclick="switchTab('quiz')" class="bg-gradient-to-r from-emerald-500 to-teal-500 text-white p-3 sm:p-4 rounded-2xl font-black shadow-md hover:shadow-xl transition flex flex-col items-center gap-1"><span class="text-3xl">🎯</span><span class="text-xs sm:text-sm">সংখ্যা কুইজ</span></button>
+      <button onclick="switchTab('count')" class="bg-gradient-to-r from-cyan-500 to-blue-500 text-white p-3 sm:p-4 rounded-2xl font-black shadow-md hover:shadow-xl transition flex flex-col items-center gap-1"><span class="text-3xl">🔍</span><span class="text-xs sm:text-sm">গণনা করো</span></button>
+      <button onclick="switchTab('memory')" class="bg-gradient-to-r from-fuchsia-500 to-pink-600 text-white p-3 sm:p-4 rounded-2xl font-black shadow-md hover:shadow-xl transition flex flex-col items-center gap-1"><span class="text-3xl">🧠</span><span class="text-xs sm:text-sm">মেমরি ম্যাচ</span></button>
+      <button onclick="switchTab('blank')" class="bg-gradient-to-r from-amber-500 to-orange-500 text-white p-3 sm:p-4 rounded-2xl font-black shadow-md hover:shadow-xl transition flex flex-col items-center gap-1"><span class="text-3xl">🧩</span><span class="text-xs sm:text-sm">ফাঁকা ঘর</span></button>
+      <button onclick="switchTab('night')" class="bg-gradient-to-r from-indigo-700 to-purple-800 text-white p-3 sm:p-4 rounded-2xl font-black shadow-md hover:shadow-xl transition flex flex-col items-center gap-1"><span class="text-3xl">🌙</span><span class="text-xs sm:text-sm">রাতের আকাশ</span></button>
+      <button onclick="switchTab('tower')" class="bg-gradient-to-r from-rose-600 to-orange-600 text-white p-3 sm:p-4 rounded-2xl font-black shadow-md hover:shadow-xl transition flex flex-col items-center gap-1"><span class="text-3xl">🏢</span><span class="text-xs sm:text-sm">ভবন তৈরি</span></button>
+    </div>
+    <div class="mt-4 bg-gradient-to-r from-amber-100 to-yellow-100 rounded-2xl p-4 border-2 border-amber-300 text-center">
+      <p class="text-xs font-black text-amber-900">💡 প্রতিটি সঠিক উত্তরে <span class="text-yellow-600">⭐ তারা</span> পাবে! ২০ তারা = ১ লেভেল আপ!</p>
+    </div>
+  </div>
+</section>
+
+<!-- NUMBERS -->
+<section id="section-numbers" class="section-view space-y-4">
+  <div class="bg-gradient-to-r from-sky-500 to-cyan-500 rounded-3xl p-5 text-white shadow-xl border-4 border-sky-300 flex items-center justify-between flex-wrap gap-3">
+    <div>
+      <h2 class="text-2xl sm:text-3xl font-title text-amber-200">🔢 সংখ্যা শিখি ১-২০</h2>
+      <p class="text-xs text-sky-100 mt-1">প্রতিটি কার্ডে টাচ করো — সংখ্যা, নাম ও উচ্চারণ শোনো</p>
+    </div>
+    <button onclick="readAllNumbers()" class="bg-white/20 hover:bg-white/30 text-white font-black px-4 py-2 rounded-xl text-sm flex items-center gap-2"><i class="fas fa-volume-up"></i> সব শোনো</button>
+  </div>
+  <div id="numbersGrid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3"></div>
+</section>
+
+<!-- WORDS -->
+<section id="section-words" class="section-view space-y-4">
+  <div class="bg-gradient-to-r from-pink-500 to-rose-500 rounded-3xl p-5 text-white shadow-xl border-4 border-pink-300">
+    <h2 class="text-2xl sm:text-3xl font-title text-amber-200">📚 শব্দ শিখি</h2>
+    <p class="text-xs text-pink-100 mt-1">প্রতিটি কার্ডে টাচ করো — মজার তথ্য শোনো</p>
+  </div>
+  <div id="wordsGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4"></div>
+</section>
+
+<!-- TRACE — FIXED -->
+<section id="section-trace" class="section-view space-y-4">
+  <div class="bg-gradient-to-r from-violet-500 to-purple-600 rounded-3xl p-5 text-white shadow-xl border-4 border-purple-300 flex items-center justify-between flex-wrap gap-3">
+    <div>
+      <h2 class="text-2xl sm:text-3xl font-title text-amber-200">✏️ সংখ্যা আঁকা শিখি</h2>
+      <p class="text-xs text-purple-100 mt-1">সংখ্যাটির ভেতরে আঙুল চালাও — লেখা বাইরে যাবে না!</p>
+    </div>
+    <div class="flex gap-2 flex-wrap">
+      <button onclick="prevTrace()" class="bg-white/20 hover:bg-white/30 text-white font-black px-4 py-2 rounded-xl text-sm flex items-center gap-1"><i class="fas fa-chevron-left"></i> আগের</button>
+      <button onclick="nextTrace()" class="bg-white/20 hover:bg-white/30 text-white font-black px-4 py-2 rounded-xl text-sm flex items-center gap-1">পরের <i class="fas fa-chevron-right"></i></button>
+      <button onclick="clearTrace()" class="bg-white/20 hover:bg-white/30 text-white font-black px-4 py-2 rounded-xl text-sm flex items-center gap-1"><i class="fas fa-eraser"></i> মুছো</button>
+      <button onclick="checkTrace()" class="bg-amber-400 hover:bg-amber-300 text-amber-950 font-black px-4 py-2 rounded-xl text-sm flex items-center gap-1"><i class="fas fa-check"></i> হয়ে গেছে</button>
+    </div>
+  </div>
+
+  <div class="bg-white rounded-3xl p-4 border-4 border-purple-200 shadow-lg">
+    <div class="text-center mb-3">
+      <span class="text-2xl font-black text-purple-900">এখন আঁকো: </span>
+      <span id="traceNumLabel" class="text-4xl font-title text-purple-700">১</span>
+      <span id="traceWordLabel" class="text-xl font-black text-purple-600 ml-2">(এক)</span>
+    </div>
+    <div id="traceCanvasWrap">
+      <canvas id="traceCanvas"></canvas>
+    </div>
+    <div class="mt-3 flex justify-center gap-2 flex-wrap">
+      <button onclick="traceStrokeColor('#ef4444')" data-c="#ef4444" class="trace-color-btn w-11 h-11 rounded-full border-4 border-white shadow-md transition hover:scale-110" style="background:#ef4444"></button>
+      <button onclick="traceStrokeColor('#3b82f6')" data-c="#3b82f6" class="trace-color-btn w-11 h-11 rounded-full border-4 border-white shadow-md transition hover:scale-110" style="background:#3b82f6"></button>
+      <button onclick="traceStrokeColor('#10b981')" data-c="#10b981" class="trace-color-btn w-11 h-11 rounded-full border-4 border-white shadow-md transition hover:scale-110" style="background:#10b981"></button>
+      <button onclick="traceStrokeColor('#f59e0b')" data-c="#f59e0b" class="trace-color-btn w-11 h-11 rounded-full border-4 border-white shadow-md transition hover:scale-110" style="background:#f59e0b"></button>
+      <button onclick="traceStrokeColor('#8b5cf6')" data-c="#8b5cf6" class="trace-color-btn w-11 h-11 rounded-full border-4 border-white shadow-md transition hover:scale-110" style="background:#8b5cf6"></button>
+      <button onclick="traceStrokeColor('#ec4899')" data-c="#ec4899" class="trace-color-btn w-11 h-11 rounded-full border-4 border-white shadow-md transition hover:scale-110" style="background:#ec4899"></button>
+    </div>
+    <p class="text-center text-xs font-black text-purple-800 mt-3">🎨 রং বেছে নাও এবং সংখ্যার ভেতরে আঙুল চালাও!</p>
+  </div>
+</section>
+
+<!-- QUIZ -->
+<section id="section-quiz" class="section-view space-y-4">
+  <div class="bg-gradient-to-r from-emerald-500 to-teal-500 rounded-3xl p-5 text-white shadow-xl border-4 border-emerald-300 flex items-center justify-between flex-wrap gap-3">
+    <div>
+      <h2 class="text-2xl sm:text-3xl font-title text-amber-200">🎯 সংখ্যা কুইজ</h2>
+      <p class="text-xs text-emerald-100 mt-1">১ থেকে ২০ পর্যন্ত র‍্যান্ডম প্রশ্ন</p>
+    </div>
+    <div class="flex items-center gap-2 flex-wrap">
+      <div class="bg-white/20 backdrop-blur px-4 py-2 rounded-2xl border border-white/30 text-center">
+        <span class="text-[10px] uppercase block text-emerald-100 font-bold">স্কোর</span>
+        <span id="quizScore" class="text-xl font-black text-amber-200">০</span>
+      </div>
+      <button onclick="startQuiz()" class="bg-white/30 hover:bg-white/40 text-white font-black px-4 py-3 rounded-2xl text-sm flex items-center gap-1.5"><i class="fas fa-gamepad"></i> খেলুন</button>
+    </div>
+  </div>
+  <div id="quizPanel" class="bg-gradient-to-br from-white to-emerald-50 rounded-3xl p-5 border-4 border-emerald-300 shadow-lg">
+    <div id="quizStartBox" class="text-center py-8">
+      <div class="text-6xl mb-4">🎯</div>
+      <h3 class="text-2xl font-black text-emerald-900 mb-2">সংখ্যা কুইজ শুরু করো</h3>
+      <p class="text-sm text-emerald-700 mb-5">২০টি র‍্যান্ডম প্রশ্ন — সব সঠিক হলে বোনাস তারা!</p>
+      <button onclick="startQuiz()" class="bg-gradient-to-r from-emerald-500 to-teal-600 text-white font-black px-8 py-3 rounded-2xl shadow-lg text-lg active:scale-95 flex items-center gap-2 mx-auto"><i class="fas fa-play"></i> খেলুন</button>
+    </div>
+    <div id="quizGameBox" class="hidden">
+      <div class="bg-emerald-100 rounded-2xl p-4 mb-4 border-2 border-emerald-300">
+        <div class="text-xs font-black text-emerald-700 uppercase mb-1">প্রশ্ন <span id="qIdxLabel">১</span></div>
+        <div id="quizQuestion" class="text-lg sm:text-2xl font-black text-emerald-950">প্রশ্ন লোড হচ্ছে...</div>
+      </div>
+      <div id="quizOptions" class="grid grid-cols-2 gap-3"></div>
+      <div id="quizFeedback" class="hidden text-center font-black p-3 mt-4 rounded-2xl"></div>
+      <div class="text-center mt-4">
+        <button onclick="startQuiz()" class="bg-amber-400 text-amber-950 text-sm font-black px-4 py-2 rounded-xl flex items-center gap-1.5 mx-auto"><i class="fas fa-rotate-right"></i> নতুন করে খেলুন</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COUNT -->
+<section id="section-count" class="section-view space-y-4">
+  <div class="bg-gradient-to-r from-cyan-500 to-blue-500 rounded-3xl p-5 text-white shadow-xl border-4 border-cyan-300 flex items-center justify-between flex-wrap gap-3">
+    <div>
+      <h2 class="text-2xl sm:text-3xl font-title text-amber-200">🔍 গণনা করো</h2>
+      <p class="text-xs text-cyan-100 mt-1">ইমোজি গুনে সঠিক সংখ্যায় টাচ করো</p>
+    </div>
+    <div class="flex items-center gap-2">
+      <div class="bg-white/20 backdrop-blur px-4 py-2 rounded-2xl border border-white/30 text-center">
+        <span class="text-[10px] uppercase block text-cyan-100 font-bold">স্কোর</span>
+        <span id="countScore" class="text-xl font-black text-amber-200">০</span>
+      </div>
+      <button onclick="newCountQuestion()" class="bg-white/30 hover:bg-white/40 text-white font-black px-4 py-3 rounded-2xl text-sm flex items-center gap-1.5"><i class="fas fa-forward"></i> নতুন</button>
+    </div>
+  </div>
+  <div class="count-tap-card">
+    <div class="text-center mb-3"><h3 id="countPrompt" class="text-xl font-black text-cyan-900">নিচের ইমোজিগুলো গুনে সঠিক সংখ্যায় টাচ করো</h3></div>
+    <div id="countTapArea" class="count-tap-area"></div>
+    <div id="countNumBtns" class="flex flex-wrap gap-3 justify-center"></div>
+    <div id="countFeedback" class="hidden text-center font-black p-3 mt-4 rounded-2xl"></div>
+  </div>
+</section>
+
+<!-- MEMORY -->
+<section id="section-memory" class="section-view space-y-4">
+  <div class="bg-gradient-to-r from-fuchsia-500 to-pink-600 rounded-3xl p-5 text-white shadow-xl border-4 border-fuchsia-300 flex items-center justify-between flex-wrap gap-3">
+    <div>
+      <h2 class="text-2xl sm:text-3xl font-title text-amber-200">🧠 মেমরি ম্যাচ</h2>
+      <p class="text-xs text-fuchsia-100 mt-1">কার্ড উল্টে সংখ্যা ও শব্দের জোড়া মিলাও</p>
+    </div>
+    <div class="flex items-center gap-2 flex-wrap">
+      <div class="bg-white/20 backdrop-blur px-4 py-2 rounded-2xl border border-white/30 text-center">
+        <span class="text-[10px] uppercase block text-fuchsia-100 font-bold">জোড়া</span>
+        <span id="memoryScore" class="text-xl font-black text-amber-200">০/৬</span>
+      </div>
+      <div class="bg-white/20 backdrop-blur px-4 py-2 rounded-2xl border border-white/30 text-center">
+        <span class="text-[10px] uppercase block text-fuchsia-100 font-bold">চাল</span>
+        <span id="memoryMoves" class="text-xl font-black text-amber-200">০</span>
+      </div>
+      <button onclick="startMemoryGame()" class="bg-white/30 hover:bg-white/40 text-white font-black px-4 py-3 rounded-2xl text-sm flex items-center gap-1.5"><i class="fas fa-rotate-right"></i> নতুন</button>
+    </div>
+  </div>
+  <div id="memoryGrid" class="grid grid-cols-3 sm:grid-cols-4 gap-3"></div>
+  <div id="memoryFeedback" class="hidden text-center font-black p-3 rounded-2xl"></div>
+</section>
+
+<!-- BLANK -->
+<section id="section-blank" class="section-view space-y-4">
+  <div class="bg-gradient-to-r from-amber-500 to-orange-500 rounded-3xl p-5 text-white shadow-xl border-4 border-amber-300 flex items-center justify-between flex-wrap gap-3">
+    <div>
+      <h2 class="text-2xl sm:text-3xl font-title text-amber-100">🧩 ফাঁকা ঘর পূরণ করো</h2>
+      <p class="text-xs text-amber-100 mt-1">সঠিক সংখ্যা বেছে খালি ঘরে বসাও</p>
+    </div>
+    <div class="flex items-center gap-2">
+      <div class="bg-white/20 backdrop-blur px-4 py-2 rounded-2xl border border-white/30 text-center">
+        <span class="text-[10px] uppercase block text-amber-100 font-bold">স্কোর</span>
+        <span id="blankScore" class="text-xl font-black text-amber-200">০/০</span>
+      </div>
+      <button onclick="newBlankGame()" class="bg-white/30 hover:bg-white/40 text-white font-black px-4 py-3 rounded-2xl text-sm flex items-center gap-1.5"><i class="fas fa-gamepad"></i> নতুন খেলা</button>
+    </div>
+  </div>
+  <div id="blankTables" class="space-y-6"></div>
+</section>
+
+<!-- NIGHT -->
+<section id="section-night" class="section-view space-y-4">
+  <div class="bg-gradient-to-r from-indigo-800 via-purple-800 to-indigo-900 rounded-3xl p-5 text-white shadow-xl border-4 border-indigo-400 flex items-center justify-between flex-wrap gap-3">
+    <div>
+      <h2 class="text-2xl sm:text-3xl font-title text-amber-200">🌙 রাতের আকাশে সংখ্যা কুইজ</h2>
+      <p class="text-xs text-indigo-100 mt-1">সঠিক উত্তর দিলে আকাশে সংখ্যাটি জ্বলে উঠবে ✨</p>
+    </div>
+    <div class="flex items-center gap-2">
+      <div class="bg-white/15 backdrop-blur px-4 py-2 rounded-2xl border border-white/30 text-center">
+        <span class="text-[10px] uppercase block text-indigo-200 font-bold">স্কোর</span>
+        <span id="nightScore" class="text-xl font-black text-amber-200">০</span>
+      </div>
+      <button onclick="restartNightGame()" class="bg-amber-400 hover:bg-amber-300 text-amber-950 font-black px-4 py-3 rounded-2xl text-xs flex items-center gap-1.5"><i class="fas fa-rotate-right"></i> নতুন</button>
+    </div>
+  </div>
+  <div class="relative w-full overflow-hidden rounded-3xl border-4 border-indigo-500 shadow-2xl" style="background:#0a0e27;">
+    <canvas id="nightSkyCanvas" style="height:420px;"></canvas>
+    <div id="nightQPanel" class="absolute top-4 left-1/2 -translate-x-1/2 z-30 bg-white/10 backdrop-blur-md border-2 border-amber-300/50 rounded-3xl px-6 py-4 text-center shadow-2xl max-w-[92%]">
+      <div class="text-[10px] text-amber-200 font-black tracking-wider uppercase mb-1">প্রশ্ন <span id="nightQIdxLabel">১</span></div>
+      <div id="nightQuestion" class="text-xl sm:text-2xl font-black text-white mb-3">প্রশ্ন লোড হচ্ছে...</div>
+      <div id="nightOptions" class="flex flex-wrap gap-2 justify-center"></div>
+    </div>
+    <div id="nightFeedback" class="hidden absolute bottom-4 left-1/2 -translate-x-1/2 z-30 px-6 py-3 rounded-2xl font-black text-white text-center shadow-xl"></div>
+  </div>
+</section>
+
+<!-- TOWER -->
+<section id="section-tower" class="section-view space-y-4">
+  <div class="bg-gradient-to-r from-rose-600 via-orange-600 to-amber-500 rounded-3xl p-5 text-white shadow-xl border-4 border-rose-300 flex items-center justify-between flex-wrap gap-3">
+    <div>
+      <h2 class="text-2xl sm:text-3xl font-title text-amber-100">🏢 ভবন তৈরি — ২০ তলা</h2>
+      <p class="text-xs text-amber-100 mt-1">সঠিক উত্তরে ভবন উঁচু হবে!</p>
+    </div>
+    <div class="flex items-center gap-2">
+      <div class="bg-white/20 backdrop-blur px-4 py-2 rounded-2xl border border-white/30 text-center">
+        <span class="text-[10px] uppercase block text-rose-100 font-bold">তলা</span>
+        <span id="towerFloor" class="text-xl font-black text-amber-100">০/২০</span>
+      </div>
+      <button onclick="restartTowerGame()" class="bg-amber-400 text-amber-950 font-black px-4 py-3 rounded-2xl text-xs flex items-center gap-1.5"><i class="fas fa-rotate-right"></i> নতুন</button>
+    </div>
+  </div>
+  <div class="relative w-full overflow-hidden rounded-3xl border-4 border-rose-400 shadow-2xl" style="background:linear-gradient(180deg,#87ceeb 0%,#b0e0e6 60%,#98d8b0 100%);">
+    <canvas id="towerCanvas" style="height:540px;"></canvas>
+    <div id="towerQPanel" class="absolute top-4 left-1/2 -translate-x-1/2 z-30 bg-white/95 backdrop-blur-md border-4 border-rose-400 rounded-3xl px-6 py-4 text-center shadow-2xl max-w-[92%]">
+      <div class="text-[10px] text-rose-700 font-black uppercase mb-1">প্রশ্ন <span id="towerQIdx">১</span></div>
+      <div id="towerQuestion" class="text-xl sm:text-2xl font-black text-rose-950 mb-3">প্রশ্ন লোড হচ্ছে...</div>
+      <div id="towerOptions" class="flex flex-wrap gap-2 justify-center"></div>
+    </div>
+    <div id="towerFeedback" class="hidden absolute bottom-4 left-1/2 -translate-x-1/2 z-30 px-6 py-3 rounded-2xl font-black text-white text-center shadow-xl"></div>
+    <div id="towerWinOverlay" class="hidden absolute inset-0 bg-gradient-to-br from-amber-400/95 via-rose-500/95 to-purple-600/95 backdrop-blur-sm flex-col items-center justify-center text-white text-center p-6 space-y-4 z-40">
+      <div class="text-7xl animate-bounce">🏆</div>
+      <h3 class="text-3xl font-title text-amber-100">তুমি ২০ তলা ভবন তৈরি করেছ!</h3>
+      <p id="towerWinMsg" class="text-lg text-amber-100 max-w-md">তুমি একজন দক্ষ ইঞ্জিনিয়ার!</p>
+      <button onclick="restartTowerGame()" class="bg-white text-rose-700 font-black px-8 py-3 rounded-2xl text-lg shadow-xl active:scale-95">আবার খেলো 🏢</button>
+    </div>
+  </div>
+</section>
+
+<!-- BADGES -->
+<section id="section-badges" class="section-view space-y-4">
+  <div class="bg-gradient-to-r from-yellow-500 to-amber-600 rounded-3xl p-5 text-white shadow-xl border-4 border-yellow-300">
+    <h2 class="text-2xl sm:text-3xl font-title text-amber-100">🏅 তোমার অর্জন ব্যাজ</h2>
+    <p class="text-xs text-amber-100 mt-1">খেলতে খেলতে ব্যাজ আনলক করো</p>
+  </div>
+  <div class="bg-gradient-to-r from-amber-100 to-yellow-100 rounded-3xl p-5 border-4 border-amber-300 shadow-lg text-center">
+    <div class="flex items-center justify-center gap-6 flex-wrap">
+      <div><span class="text-3xl">⭐</span><div class="text-2xl font-black text-amber-800" id="badgeStarCount">০</div><div class="text-[10px] font-bold text-amber-700">তারা</div></div>
+      <div><span class="text-3xl">🏆</span><div class="text-2xl font-black text-amber-800" id="badgeLvl">১</div><div class="text-[10px] font-bold text-amber-700">লেভেল</div></div>
+      <div><span class="text-3xl">🔥</span><div class="text-2xl font-black text-amber-800" id="badgeStreak">০</div><div class="text-[10px] font-bold text-amber-700">দিন স্ট্রিক</div></div>
+      <div><span class="text-3xl">🏅</span><div class="text-2xl font-black text-amber-800" id="badgeCount">০</div><div class="text-[10px] font-bold text-amber-700">ব্যাজ</div></div>
+    </div>
+    <button onclick="showCertificate()" class="mt-4 bg-gradient-to-r from-amber-500 to-orange-500 text-white font-black px-6 py-3 rounded-2xl shadow-lg text-sm"><i class="fas fa-scroll"></i> 📜 সার্টিফিকেট দেখো</button>
+  </div>
+  <div id="badgesGrid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3"></div>
+</section>
+
+</main>
+
+<footer class="bg-slate-100 p-5 text-center text-xs border-t border-gray-200 space-y-2">
+  <p class="font-bold text-sky-800">NCTB • আমার বাংলা বই • প্রথম শ্রেণি • পাঠ ৪১ : সংখ্যা শিখি</p>
+  <p class="text-gray-400 text-[11px]">শিশুদের জন্য সহজ ও মজাদার ইন্টারঅ্যাকটিভ বাংলা ডিজিটাল অ্যাপ • ২০২৬</p>
+</footer>
+
+</div>
+
+<!-- PRINT MODAL -->
+<div id="printModal" class="no-print fixed inset-0 bg-slate-900/70 backdrop-blur-sm z-[90] hidden items-center justify-center p-3">
+  <div class="bg-white rounded-3xl max-w-xl w-full shadow-2xl overflow-hidden border-4 border-emerald-200 max-h-[92vh] flex flex-col">
+    <div class="bg-gradient-to-r from-emerald-600 to-teal-600 p-4 text-white flex items-center justify-between">
+      <h3 class="text-lg font-black">🖨️ প্রিন্ট উপকরণ</h3>
+      <button onclick="closePrintModal()" class="bg-white/20 w-9 h-9 rounded-full flex items-center justify-center"><i class="fas fa-xmark"></i></button>
+    </div>
+    <div class="p-4 overflow-y-auto space-y-3">
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+        <label class="flex items-center gap-2.5 bg-amber-50 border-2 border-amber-300 rounded-xl p-3 cursor-pointer sm:col-span-2"><input type="checkbox" id="pr-cards" checked class="w-4 h-4 accent-amber-600"><span class="text-sm font-bold">🎴 A4 সংখ্যা কার্ড (৬টি/পৃষ্ঠা)</span></label>
+        <label class="flex items-center gap-2.5 bg-yellow-50 border-2 border-yellow-300 rounded-xl p-3 cursor-pointer sm:col-span-2"><input type="checkbox" id="pr-cert" class="w-4 h-4 accent-yellow-600"><span class="text-sm font-bold">📜 সার্টিফিকেট</span></label>
+        <label class="flex items-center gap-2.5 bg-slate-50 border-2 border-slate-200 rounded-xl p-3 cursor-pointer"><input type="checkbox" id="pr-numbers" checked class="w-4 h-4 accent-sky-600"><span class="text-sm font-bold">🔢 সংখ্যা তালিকা</span></label>
+        <label class="flex items-center gap-2.5 bg-slate-50 border-2 border-slate-200 rounded-xl p-3 cursor-pointer"><input type="checkbox" id="pr-words" checked class="w-4 h-4 accent-pink-600"><span class="text-sm font-bold">📚 শব্দ শিখি</span></label>
+        <label class="flex items-center gap-2.5 bg-slate-50 border-2 border-slate-200 rounded-xl p-3 cursor-pointer"><input type="checkbox" id="pr-blank" checked class="w-4 h-4 accent-amber-600"><span class="text-sm font-bold">🧩 ফাঁকা ঘর</span></label>
+        <label class="flex items-center gap-2.5 bg-slate-50 border-2 border-slate-200 rounded-xl p-3 cursor-pointer"><input type="checkbox" id="pr-key" class="w-4 h-4 accent-emerald-600"><span class="text-sm font-bold">🗝️ উত্তরপত্র</span></label>
+      </div>
+      <div class="flex items-center justify-between gap-2 bg-amber-50 border border-amber-200 rounded-xl p-3">
+        <span class="text-xs font-bold text-amber-900">দ্রুত:</span>
+        <div class="flex gap-2">
+          <button onclick="selectAllPrint(true)" class="text-xs font-black bg-amber-400 text-amber-950 px-3 py-1.5 rounded-lg">সব</button>
+          <button onclick="selectAllPrint(false)" class="text-xs font-black bg-slate-200 text-slate-700 px-3 py-1.5 rounded-lg">কিছু না</button>
+        </div>
+      </div>
+    </div>
+    <div class="p-4 bg-slate-50 border-t flex gap-2.5">
+      <button onclick="generatePrint()" class="flex-1 bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-black py-3 rounded-2xl active:scale-95 flex items-center justify-center gap-2"><i class="fas fa-print"></i> প্রিন্ট</button>
+      <button onclick="closePrintModal()" class="sm:w-32 bg-white text-slate-700 font-bold py-3 rounded-2xl border-2 border-slate-200">বাতিল</button>
+    </div>
+  </div>
+</div>
+
+<div id="installModal" class="no-print fixed inset-0 bg-slate-900/75 backdrop-blur-sm z-[95] hidden items-center justify-center p-3">
+  <div class="bg-white rounded-3xl max-w-lg w-full shadow-2xl overflow-hidden border-4 border-pink-200 max-h-[92vh] flex flex-col">
+    <div class="bg-gradient-to-r from-pink-600 to-rose-600 p-4 text-white flex items-center justify-between">
+      <h3 class="text-lg font-black">📲 ইনস্টল করুন</h3>
+      <button onclick="closeInstallModal()" class="bg-white/20 w-9 h-9 rounded-full flex items-center justify-center"><i class="fas fa-xmark"></i></button>
+    </div>
+    <div class="p-4 overflow-y-auto space-y-3">
+      <div id="installNativeBox" class="hidden bg-emerald-50 border-2 border-emerald-300 rounded-2xl p-4 text-center space-y-2">
+        <div class="text-4xl">✨</div>
+        <button onclick="triggerNativeInstall()" class="w-full bg-gradient-to-r from-pink-600 to-rose-600 text-white font-black py-3 rounded-2xl">🚀 ইনস্টল করুন</button>
+      </div>
+      <p id="installHeaderMsg" class="text-xs text-slate-600 font-semibold bg-pink-50 border border-pink-200 rounded-xl p-3"></p>
+      <div id="installSteps" class="space-y-2.5 text-sm"></div>
+    </div>
+    <div class="p-4 bg-slate-50 border-t"><button onclick="closeInstallModal()" class="w-full bg-slate-700 text-white font-bold py-3 rounded-2xl">বুঝেছি 👍</button></div>
+  </div>
+</div>
+
+<div id="printArea"></div>
+
+<script>
+/* ═══════════════════════════════════════════════════════════════
+   PERSISTENT STATE
+   ═══════════════════════════════════════════════════════════════ */
+let stars = 0, level = 1, streak = 0, lastPlayDate = '';
+let unlockedBadges = [];
+try {
+  stars = parseInt(localStorage.getItem('n41_stars') || '0');
+  level = parseInt(localStorage.getItem('n41_level') || '1');
+  streak = parseInt(localStorage.getItem('n41_streak') || '0');
+  lastPlayDate = localStorage.getItem('n41_lastDate') || '';
+  unlockedBadges = JSON.parse(localStorage.getItem('n41_badges') || '[]');
+} catch(e){}
+function saveStats(){
+  try {
+    localStorage.setItem('n41_stars', stars);
+    localStorage.setItem('n41_level', level);
+    localStorage.setItem('n41_streak', streak);
+    localStorage.setItem('n41_lastDate', lastPlayDate);
+    localStorage.setItem('n41_badges', JSON.stringify(unlockedBadges));
+  } catch(e){}
+}
+function updateStarBar(){
+  const sc = document.getElementById('starCount'); if(sc) sc.innerText = toBn(stars);
+  const ln = document.getElementById('lvlNum'); if(ln) ln.innerText = toBn(level);
+  const ds = document.getElementById('drawerStar'); if(ds) ds.innerText = toBn(stars);
+  const dl = document.getElementById('drawerLvl'); if(dl) dl.innerText = toBn(level);
+  const dk = document.getElementById('drawerStreak'); if(dk) dk.innerText = toBn(streak);
+  const bs = document.getElementById('badgeStarCount'); if(bs) bs.innerText = toBn(stars);
+  const bl = document.getElementById('badgeLvl'); if(bl) bl.innerText = toBn(level);
+  const bk = document.getElementById('badgeStreak'); if(bk) bk.innerText = toBn(streak);
+  const bc = document.getElementById('badgeCount'); if(bc) bc.innerText = toBn(unlockedBadges.length);
+}
+function addStars(n){
+  stars += n;
+  const newLvl = Math.floor(stars / 20) + 1;
+  if(newLvl > level){
+    level = newLvl;
+    setTimeout(() => {
+      showMascotMsg(`🎉 অভিনন্দন! লেভেল ${toBn(level)}!`);
+      speakText(`${getNamePrefix()}অভিনন্দন! তুমি লেভেল ${toBn(level)} এ পৌঁছেছো!`);
+      fireworks(window.innerWidth/2, window.innerHeight/2);
+      checkBadges();
+    }, 800);
+  }
+  updateStarBar();
+  saveStats();
+}
+function updateStreak(){
+  const today = new Date().toISOString().slice(0,10);
+  if(lastPlayDate !== today){
+    const yest = new Date(Date.now() - 86400000).toISOString().slice(0,10);
+    if(lastPlayDate === yest) streak++; else streak = 1;
+    lastPlayDate = today;
+    saveStats(); updateStarBar();
+  }
+}
+
+/* MASCOT */
+const MASCOT_EMOJIS = ['🐼','🐻','🐨','🦊','🐯','🐸'];
+let mascotEmoji = MASCOT_EMOJIS[Math.floor(Math.random()*MASCOT_EMOJIS.length)];
+let mascotBubbleTimer = null;
+function initMascot(){ const m = document.getElementById('mascotBody'); if(m) m.innerText = mascotEmoji; }
+function mascotTap(){
+  playSound('click');
+  const messages = ['তুমি পারবে! 💪','আরো একবার খেলো! 🎮','তোমাকে ভালোবাসি! ❤️','চলো শিখি! 📚','তুমি দুর্দান্ত! 🌟'];
+  const msg = messages[Math.floor(Math.random()*messages.length)];
+  showMascotMsg(msg);
+  speakText(msg.replace(/[💪🎮❤️📚🌟]/g,''));
+  const m = document.getElementById('mascot');
+  if(m){ m.classList.add('happy'); setTimeout(() => m.classList.remove('happy'), 700); }
+}
+function showMascotMsg(msg, duration = 3000){
+  const b = document.getElementById('mascotBubble');
+  if(!b) return;
+  b.textContent = msg;
+  b.classList.add('show');
+  clearTimeout(mascotBubbleTimer);
+  mascotBubbleTimer = setTimeout(() => b.classList.remove('show'), duration);
+}
+function mascotHappy(){ const m = document.getElementById('mascot'); if(!m) return; m.classList.add('happy'); setTimeout(() => m.classList.remove('happy'), 700); }
+function mascotSad(){ const m = document.getElementById('mascot'); if(!m) return; m.classList.add('sad'); setTimeout(() => m.classList.remove('sad'), 600); }
+
+/* CONFETTI */
+function confetti(count = 40){
+  if(!audioEnabled) count = Math.min(count, 20);
+  const colors = ['#fbbf24','#f472b6','#60a5fa','#34d399','#a78bfa','#f87171','#facc15','#fb923c'];
+  for(let i = 0; i < count; i++){
+    const p = document.createElement('div');
+    p.className = 'confetti-piece';
+    p.style.left = (Math.random() * 100) + 'vw';
+    p.style.top = '-20px';
+    p.style.background = colors[Math.floor(Math.random()*colors.length)];
+    p.style.width = (8 + Math.random()*8) + 'px';
+    p.style.height = (10 + Math.random()*10) + 'px';
+    p.style.transform = `rotate(${Math.random()*360}deg)`;
+    document.body.appendChild(p);
+    const duration = 2000 + Math.random() * 1500;
+    const rot = (Math.random() > 0.5 ? 1 : -1) * (720 + Math.random() * 720);
+    p.animate([
+      { transform: `translateY(0) rotate(0deg)`, opacity: 1 },
+      { transform: `translate(${(Math.random()-0.5)*200}px, 100vh) rotate(${rot}deg)`, opacity: 0.3 }
+    ], { duration, easing: 'cubic-bezier(.2,.8,.3,1)' }).onfinish = () => p.remove();
+  }
+}
+function fireworks(x, y){
+  const colors = ['#fbbf24','#f472b6','#60a5fa','#34d399','#a78bfa'];
+  for(let i = 0; i < 12; i++){
+    const f = document.createElement('div');
+    f.className = 'firework';
+    const color = colors[i % colors.length];
+    f.style.left = x + 'px'; f.style.top = y + 'px';
+    f.style.background = color;
+    f.style.boxShadow = `0 0 20px ${color}`;
+    document.body.appendChild(f);
+    const angle = (i / 12) * Math.PI * 2;
+    const dist = 100 + Math.random() * 100;
+    f.animate([
+      { transform: 'translate(-50%,-50%) scale(0)', opacity: 1 },
+      { transform: `translate(calc(-50% + ${Math.cos(angle)*dist}px), calc(-50% + ${Math.sin(angle)*dist}px)) scale(1)`, opacity: 0 }
+    ], { duration: 800, easing: 'ease-out' }).onfinish = () => f.remove();
+  }
+}
+
+/* BADGES */
+const BADGES = [
+  { id:'first_star', emoji:'🌟', name:'প্রথম তারা', desc:'১টি তারা পাও' },
+  { id:'ten_stars', emoji:'⭐', name:'১০ তারা', desc:'১০টি তারা' },
+  { id:'fifty_stars', emoji:'💫', name:'৫০ তারা', desc:'৫০টি তারা' },
+  { id:'hundred_stars', emoji:'✨', name:'১০০ তারা', desc:'১০০টি তারা' },
+  { id:'quiz_master', emoji:'🎯', name:'কুইজ মাস্টার', desc:'১০ সঠিক' },
+  { id:'memory_master', emoji:'🧠', name:'মেমরি মাস্টার', desc:'মেমরি জয়' },
+  { id:'tower_builder', emoji:'🏢', name:'ইঞ্জিনিয়ার', desc:'২০ তলা' },
+  { id:'tracer', emoji:'✏️', name:'লেখক', desc:'১০টি সংখ্যা' },
+  { id:'counter', emoji:'🔍', name:'গণিতবিদ', desc:'২০টি গণনা' },
+  { id:'streak3', emoji:'🔥', name:'৩ দিন স্ট্রিক', desc:'টানা ৩ দিন' },
+  { id:'streak7', emoji:'🔥🔥', name:'সাপ্তাহিক', desc:'টানা ৭ দিন' },
+  { id:'perfect', emoji:'🏆', name:'পারফেক্ট', desc:'ভুল ছাড়া কুইজ' }
+];
+let counters = { quiz_correct:0, count_correct:0, traces:0, memory_wins:0, tower_wins:0, perfect_quiz:0 };
+try { counters = JSON.parse(localStorage.getItem('n41_counters') || JSON.stringify(counters)); } catch(e){}
+function saveCounters(){ try { localStorage.setItem('n41_counters', JSON.stringify(counters)); } catch(e){} }
+function renderBadges(){
+  const g = document.getElementById('badgesGrid');
+  if(!g) return;
+  g.innerHTML = BADGES.map(b => {
+    const unlocked = unlockedBadges.includes(b.id);
+    return `<div class="badge-item ${unlocked ? 'unlocked' : ''}">
+      <div class="badge-emoji">${b.emoji}</div>
+      <div class="badge-name">${b.name}</div>
+      <div class="badge-desc">${b.desc}</div>
+    </div>`;
+  }).join('');
+}
+function checkBadges(){
+  const newBadges = [];
+  function unlock(id){ if(!unlockedBadges.includes(id)){ unlockedBadges.push(id); newBadges.push(id); } }
+  if(stars >= 1) unlock('first_star');
+  if(stars >= 10) unlock('ten_stars');
+  if(stars >= 50) unlock('fifty_stars');
+  if(stars >= 100) unlock('hundred_stars');
+  if(counters.quiz_correct >= 10) unlock('quiz_master');
+  if(counters.memory_wins >= 1) unlock('memory_master');
+  if(counters.tower_wins >= 1) unlock('tower_builder');
+  if(counters.traces >= 10) unlock('tracer');
+  if(counters.count_correct >= 20) unlock('counter');
+  if(streak >= 3) unlock('streak3');
+  if(streak >= 7) unlock('streak7');
+  if(counters.perfect_quiz >= 1) unlock('perfect');
+  if(newBadges.length > 0){
+    saveStats(); renderBadges(); updateStarBar();
+    setTimeout(() => {
+      const b = BADGES.find(x => x.id === newBadges[0]);
+      showMascotMsg(`🏅 নতুন ব্যাজ: ${b.name}!`);
+      speakText(`অভিনন্দন! নতুন ব্যাজ: ${b.name}`);
+      confetti(60); fireworks(window.innerWidth/2, window.innerHeight/3);
+    }, 500);
+  }
+}
+
+/* CERTIFICATE */
+function showCertificate(){
+  playSound('click'); stopAllSpeech();
+  const name = (childName || 'শিক্ষার্থী').trim();
+  const today = new Date().toLocaleDateString('bn-BD');
+  const cert = `<div class="pr-cert">
+    <div><div style="font-size:50pt;">🎓</div><div class="cert-head">কৃতিত্ব সার্টিফিকেট</div>
+    <div class="cert-sub">🎨 পরিকল্পনা ও ডিজাইনে: মো: সাইফুল্লাহ সরওয়ার</div>
+    <div class="cert-line"><span class="cert-name">${name}</span></div>
+    <div class="cert-body">সফলভাবে <strong>পাঠ ৪১: সংখ্যা শিখি</strong> সম্পন্ন করেছ!<br>তুমি মোট <strong>${toBn(stars)}</strong> তারা সংগ্রহ করেছো,<br><strong>লেভেল ${toBn(level)}</strong> এ পৌঁছেছো এবং<br><strong>${toBn(unlockedBadges.length)}টি ব্যাজ</strong> অর্জন করেছো।</div>
+    <div class="cert-stars">⭐⭐⭐⭐⭐</div></div>
+    <div><div class="cert-seal">🏅</div><div class="cert-foot"><span>📅 তারিখ: ${today}</span><span>✍️ স্বাক্ষর: __________</span></div>
+    <div style="margin-top:8mm;font-size:9pt;color:#64748b;font-weight:700;">NCTB • আমার বাংলা বই • প্রথম শ্রেণি • ২০২৬</div></div>
+  </div>`;
+  document.getElementById('printArea').innerHTML = cert;
+  playSound('chime'); confetti(80);
+  setTimeout(() => window.print(), 400);
+}
+window.onafterprint = function(){ document.getElementById('printArea').innerHTML = ''; };
+
+/* ZOOM */
+let currentZoom = 1.0;
+function applyZoom(){
+  const c = document.getElementById('appContainer');
+  if(c) c.style.zoom = currentZoom;
+  const zl = document.getElementById('zoomLevel');
+  if(zl){ zl.textContent = Math.round(currentZoom * 100) + '%'; zl.classList.add('show'); clearTimeout(zl._hideTimer); zl._hideTimer = setTimeout(() => zl.classList.remove('show'), 1500); }
+}
+function zoomIn(){ currentZoom = Math.min(1.8, currentZoom + 0.1); applyZoom(); }
+function zoomOut(){ currentZoom = Math.max(0.5, currentZoom - 0.1); applyZoom(); }
+function zoomReset(){ currentZoom = 1.0; applyZoom(); }
+
+/* TAB SWITCHING */
+const ALL_TABS = ['lesson','numbers','words','trace','quiz','count','memory','blank','night','tower','badges'];
+function switchTab(name){
+  playSound('click');
+  stopAllSpeech();
+  ALL_TABS.forEach(t => {
+    const sec = document.getElementById('section-' + t);
+    if(sec) sec.classList.remove('active');
+    const btn = document.getElementById('tab-' + t);
+    if(btn) btn.classList.remove('active');
+  });
+  const sec = document.getElementById('section-' + name);
+  if(sec) sec.classList.add('active');
+  const btn = document.getElementById('tab-' + name);
+  if(btn) btn.classList.add('active');
+  if(name === 'night') setTimeout(initNightGame, 100);
+  else stopNightGame();
+  if(name === 'tower') setTimeout(initTowerGame, 150);
+  else stopTowerGame();
+  if(name === 'count') setTimeout(newCountQuestion, 100);
+  if(name === 'trace') setTimeout(initTrace, 100);
+  if(name === 'memory') setTimeout(startMemoryGame, 100);
+  if(name === 'badges') renderBadges();
+  const main = document.getElementById('mainContent');
+  if(main) main.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  const tips = {
+    lesson: 'চলো শিখি! 📚', numbers: 'সংখ্যা কার্ডে টাচ করো! 🔢', words: 'শব্দ শুনতে টাচ করো! 📚',
+    trace: 'সংখ্যার ভেতরে আঁকো! ✏️', quiz: 'সঠিক উত্তর দাও! 🎯', count: 'গুনে টাচ করো! 🔍',
+    memory: 'জোড়া মিলাও! 🧠', blank: 'খালি ঘর পূরণ করো! 🧩', night: 'আকাশে সংখ্যা জ্বালাও! 🌙',
+    tower: 'ভবন বানাও! 🏢', badges: 'তোমার অর্জন দেখো! 🏅'
+  };
+  if(tips[name]) showMascotMsg(tips[name], 2500);
+}
+
+/* SPEECH */
+let speechSession = 0;
+let audioPlayerFallback = null;
+function speakText(text, onEnd=null){
+  if(!audioEnabled){ if(onEnd) onEnd(); return; }
+  if('speechSynthesis' in window) window.speechSynthesis.cancel();
+  if(audioPlayerFallback){ audioPlayerFallback.pause(); audioPlayerFallback = null; }
+  const mySession = ++speechSession;
+  getAudioContext(); initBengaliVoices();
+  function isStale(){ return mySession !== speechSession; }
+  function finish(){ if(isStale()) return; if(onEnd) onEnd(); }
+  function playOnline(phrase){
+    try{
+      const url = `https://translate.google.com/translate_tts?ie=UTF-8&q=${encodeURIComponent(phrase)}&tl=bn&client=tw-ob`;
+      audioPlayerFallback = new Audio(url);
+      audioPlayerFallback.playbackRate = currentSpeechRate;
+      audioPlayerFallback.onended = () => { if(isStale()) return; audioPlayerFallback = null; finish(); };
+      audioPlayerFallback.onerror = () => { if(isStale()) return; audioPlayerFallback = null; finish(); };
+      const p = audioPlayerFallback.play();
+      if(p !== undefined) p.catch(() => { if(!isStale()) finish(); });
+    } catch(e){ if(!isStale()) finish(); }
+  }
+  if('speechSynthesis' in window){
+    if(window.speechSynthesis.paused) window.speechSynthesis.resume();
+    setTimeout(() => {
+      if(isStale()) return;
+      if(!availableBengaliVoice){ playOnline(text); return; }
+      try{
+        const u = new SpeechSynthesisUtterance(text);
+        u.lang = 'bn-BD'; u.rate = currentSpeechRate; u.pitch = 1.15;
+        if(availableBengaliVoice) u.voice = availableBengaliVoice;
+        u.onend = () => { if(isStale()) return; finish(); };
+        u.onerror = () => { if(isStale()) return; playOnline(text); };
+        window.speechSynthesis.speak(u);
+      } catch(e){ if(!isStale()) playOnline(text); }
+    }, 60);
+  } else playOnline(text);
+}
+function stopAllSpeech(){
+  playSound('click');
+  speechSession++;
+  if('speechSynthesis' in window) window.speechSynthesis.cancel();
+  if(audioPlayerFallback){ audioPlayerFallback.pause(); audioPlayerFallback = null; }
+  showToast('🔇 সব কথা বন্ধ');
+}
+
+/* DRAWER */
+function openDrawer(){document.getElementById('settingsDrawer').classList.add('open');document.getElementById('drawerBackdrop').classList.add('open');document.getElementById('settingsFab').classList.add('open');document.getElementById('fabIcon').className='fas fa-xmark';document.body.style.overflow='hidden';}
+function closeDrawer(){document.getElementById('settingsDrawer').classList.remove('open');document.getElementById('drawerBackdrop').classList.remove('open');document.getElementById('settingsFab').classList.remove('open');document.getElementById('fabIcon').className='fas fa-sliders';document.body.style.overflow='';}
+function toggleDrawer(){playSound('click');const d=document.getElementById('settingsDrawer');if(d.classList.contains('open'))closeDrawer();else openDrawer();}
+function updateDrawerSound(){const i=document.getElementById('drawerSoundIcon'),t=document.getElementById('drawerSoundText');if(audioEnabled){i.className='fas fa-volume-up';t.innerText='শব্দ চালু আছে';}else{i.className='fas fa-volume-xmark';t.innerText='শব্দ বন্ধ আছে';}}
+
+/* DATA */
+const NUMBERS = [
+  {n:1, bn:'এক', emoji:'🐦', item:'পাখি'},{n:2, bn:'দুই', emoji:'👀', item:'চোখ'},
+  {n:3, bn:'তিন', emoji:'🖊️', item:'কলম'},{n:4, bn:'চার', emoji:'🥚', item:'ডিম'},
+  {n:5, bn:'পাঁচ', emoji:'🧸', item:'পুতুল'},{n:6, bn:'ছয়', emoji:'🍃', item:'ঋতু'},
+  {n:7, bn:'সাত', emoji:'🏅', item:'বীরশ্রেষ্ঠ'},{n:8, bn:'আট', emoji:'🪐', item:'গ্রহ'},
+  {n:9, bn:'নয়', emoji:'🕘', item:'টা বাজে'},{n:10, bn:'দশ', emoji:'🪰', item:'ফড়িং'},
+  {n:11, bn:'এগারো', emoji:'⚽', item:'ফুটবল দল'},{n:12, bn:'বারো', emoji:'📅', item:'মাস'},
+  {n:13, bn:'তেরো', emoji:'🦅', item:'পাখি'},{n:14, bn:'চৌদ্দ', emoji:'📚', item:'বই'},
+  {n:15, bn:'পনেরো', emoji:'🍋', item:'লেবু'},{n:16, bn:'ষোলো', emoji:'🔥', item:'কাঠি'},
+  {n:17, bn:'সতেরো', emoji:'🍊', item:'কমলা'},{n:18, bn:'আঠারো', emoji:'🏀', item:'বল'},
+  {n:19, bn:'উনিশ', emoji:'🥭', item:'আম'},{n:20, bn:'বিশ', emoji:'🌸', item:'ফুল'}
+];
+const BN_DIGITS = ['০','১','২','৩','৪','৫','৬','৭','৮','৯'];
+function toBn(v){ return String(v).replace(/\d/g, d => BN_DIGITS[+d]); }
+
+const WORDS = [
+  {n:1, emoji:'🌞', title:'এক', fact:'একটি সূর্য', sub:'আকাশে একটাই সূর্য'},
+  {n:2, emoji:'👀', title:'দুই', fact:'দুই চোখ', sub:'আমাদের দুটি চোখ'},
+  {n:3, emoji:'🖊️', title:'তিন', fact:'তিনটি কলম', sub:'তিনটি রঙিন কলম'},
+  {n:4, emoji:'🥚', title:'চার', fact:'চারটি ডিম', sub:'চারটি ডিম = এক হালি'},
+  {n:5, emoji:'🧸', title:'পাঁচ', fact:'পাঁচটি পুতুল', sub:'পাঁচটি সুন্দর পুতুল'},
+  {n:6, emoji:'🍃', title:'ছয়', fact:'ছয়টি ঋতু', sub:'বাংলাদেশে ছয়টি ঋতু'},
+  {n:7, emoji:'🏅', title:'সাত', fact:'সাতজন বীরশ্রেষ্ঠ', sub:'স্বাধীনতার সাতজন বীরশ্রেষ্ঠ'},
+  {n:8, emoji:'🪐', title:'আট', fact:'আটটি গ্রহ', sub:'সৌরজগতের আটটি গ্রহ'},
+  {n:9, emoji:'🕘', title:'নয়', fact:'নয়টা বাজে', sub:'ঘড়িতে নয়টা বাজে'},
+  {n:10, emoji:'🪰', title:'দশ', fact:'দশটি ফড়িং', sub:'দশটি ফড়িং উড়ছে'},
+  {n:11, emoji:'⚽', title:'এগারো', fact:'এগারো জন খেলোয়াড়', sub:'ফুটবল দলে এগারো জন'},
+  {n:12, emoji:'📅', title:'বারো', fact:'বারো মাস', sub:'বছরে বারোটি মাস'},
+  {n:13, emoji:'🦅', title:'তেরো', fact:'তেরোটি পাখি', sub:'তেরোটি পাখি উড়ছে'},
+  {n:14, emoji:'📚', title:'চৌদ্দ', fact:'চৌদ্দটি বই', sub:'চৌদ্দটি নতুন বই'},
+  {n:15, emoji:'🍋', title:'পনেরো', fact:'পনেরোটি লেবু', sub:'পনেরোটি লেবু'},
+  {n:16, emoji:'🔥', title:'ষোলো', fact:'ষোলোটি কাঠি', sub:'ষোলোটি কাঠি'},
+  {n:17, emoji:'🍊', title:'সতেরো', fact:'সতেরোটি কমলা', sub:'সতেরোটি কমলা'},
+  {n:18, emoji:'🏀', title:'আঠারো', fact:'আঠারোটি বল', sub:'আঠারোটি বল'},
+  {n:19, emoji:'🥭', title:'উনিশ', fact:'উনিশটি আম', sub:'উনিশটি আম'},
+  {n:20, emoji:'🌸', title:'বিশ', fact:'বিশটি ফুল', sub:'বিশটি সুন্দর ফুল'}
+];
+
+const QUIZ_TEMPLATES = [
+  (num) => ({ q: `"${num.bn}" — সংখ্যাটি কত?`, correct: toBn(num.n), wrongs: pickWrongNums(num.n, 3).map(w => toBn(w)) }),
+  (num) => ({ q: `${toBn(num.n)} — সংখ্যাটির নাম কী?`, correct: num.bn, wrongs: pickWrongNums(num.n, 3).map(w => NUMBERS.find(x => x.n === w).bn) }),
+  (num) => ({ q: `${num.emoji} × ${toBn(num.n)} — কতটি ${num.item}?`, correct: toBn(num.n), wrongs: pickWrongNums(num.n, 3).map(w => toBn(w)) }),
+  (num) => {
+    const facts = [
+      {n:1, q:'আকাশে কতটি সূর্য?', a:1, w:[2,3,4]},
+      {n:2, q:'আমাদের কতটি চোখ?', a:2, w:[1,3,4]},
+      {n:4, q:'এক হালিতে কতটি ডিম?', a:4, w:[3,5,6]},
+      {n:6, q:'বাংলাদেশে কতটি ঋতু?', a:6, w:[4,5,7]},
+      {n:7, q:'কতজন বীরশ্রেষ্ঠ?', a:7, w:[5,6,8]},
+      {n:8, q:'সৌরজগতে কতটি গ্রহ?', a:8, w:[7,9,10]},
+      {n:11, q:'ফুটবল দলে কতজন খেলোয়াড়?', a:11, w:[9,10,12]},
+      {n:12, q:'বছরে কতটি মাস?', a:12, w:[10,11,13]}
+    ];
+    const f = facts[Math.floor(Math.random() * facts.length)];
+    return { q: f.q, correct: toBn(f.a), wrongs: f.w.map(w => toBn(w)) };
+  },
+  (num) => ({ q: `${toBn(num.n)}টি কী?`, correct: num.item, wrongs: pickWrongItems(num.item, 3) })
+];
+function pickWrongNums(exclude, count){
+  const pool = NUMBERS.filter(x => x.n !== exclude).map(x => x.n);
+  const picked = [];
+  while(picked.length < count){ const r = pool[Math.floor(Math.random() * pool.length)]; if(!picked.includes(r)) picked.push(r); }
+  return picked;
+}
+function pickWrongItems(exclude, count){
+  const pool = NUMBERS.filter(x => x.item !== exclude).map(x => x.item);
+  const picked = [];
+  while(picked.length < count){ const r = pool[Math.floor(Math.random() * pool.length)]; if(!picked.includes(r)) picked.push(r); }
+  return picked;
+}
+
+/* GLOBAL STATE */
+let audioEnabled = true, currentSpeechRate = 0.8, childName = '';
+let availableBengaliVoice = null, audioCtx = null;
+let blankAnswers = {}, blankTables = [], quizState = null;
+let nightState = null, nightAnimId = null;
+let countState = null, towerState = null, towerAnimId = null;
+let memoryState = null;
+let traceState = null;
+let traceRenderPending = false;
+
+try { childName = localStorage.getItem('n41ChildName') || ''; } catch(e){}
+function getNamePrefix(){ return childName && childName.trim() ? childName.trim() + ', ' : ''; }
+function saveChildName(name){ childName = name; try { localStorage.setItem('n41ChildName', name); } catch(e){} updateHeaderGreeting(); }
+function clearChildName(){ playSound('click'); childName = ''; try { localStorage.setItem('n41ChildName', ''); } catch(e){} updateHeaderGreeting(); showToast('নাম মুছে ফেলা হয়েছে।'); }
+function updateHeaderGreeting(){
+  const el = document.getElementById('headerGreeting');
+  if(!el) return;
+  const n = (childName || '').trim();
+  if(n) el.innerHTML = `<span>👋</span><span>স্বাগতম, <strong class="text-yellow-200 text-sm sm:text-base font-extrabold">${n}</strong>! শুভ শিক্ষা 🎓</span><span>✨</span>`;
+  else el.innerHTML = `<span>✨</span><span>পরিকল্পনা ও ডিজাইনে: <strong class="text-yellow-200 text-sm sm:text-base font-extrabold">মো: সাইফুল্লাহ সরওয়ার</strong></span><span>👑</span>`;
+}
+
+const PRAISES = ['বাহবা সুন্দর!','অসাধারণ হয়েছে!','খুব ভালো!','অপূর্ব!','তুমি দারুণ পারো!','আহা কী চমৎকার!','তোমাকে অভিনন্দন!','তুমি সেরা!','একদম ঠিক!','চমৎকার হয়েছে!','তোমার বুদ্ধি অসাধারণ!','বাহ! কী দারুণ!'];
+const RETRIES = ['আবার চেষ্টা করো!','চিন্তা করে আবার ট্রাই করো!','হলো না, আবার চেষ্টা করো!','একটু ভেবে দেখো!','আরেকবার ট্রাই করো!'];
+function getRandomItem(a){ return a[Math.floor(Math.random()*a.length)]; }
+
+function getAudioContext(){ if(!audioCtx){ const AC = window.AudioContext || window.webkitAudioContext; if(AC) audioCtx = new AC(); } if(audioCtx && audioCtx.state === 'suspended') audioCtx.resume(); return audioCtx; }
+function playSound(type){
+  if(!audioEnabled) return;
+  try{
+    const ctx = getAudioContext(); if(!ctx) return;
+    const o = ctx.createOscillator(), g = ctx.createGain();
+    o.connect(g); g.connect(ctx.destination);
+    const now = ctx.currentTime;
+    if(type === 'correct'){ o.type='triangle'; [523.25,659.25,783.99,1046.5].forEach((f,i) => o.frequency.setValueAtTime(f, now + i*.1)); g.gain.setValueAtTime(.25,now); g.gain.exponentialRampToValueAtTime(.01,now+.5); o.start(now); o.stop(now+.5); }
+    else if(type === 'wrong'){ o.type='sawtooth'; o.frequency.setValueAtTime(220,now); o.frequency.setValueAtTime(164.81,now+.15); g.gain.setValueAtTime(.25,now); g.gain.exponentialRampToValueAtTime(.01,now+.4); o.start(now); o.stop(now+.4); }
+    else if(type === 'click'){ o.type='sine'; o.frequency.setValueAtTime(600,now); o.frequency.exponentialRampToValueAtTime(200,now+.05); g.gain.setValueAtTime(.18,now); g.gain.exponentialRampToValueAtTime(.01,now+.05); o.start(now); o.stop(now+.05); }
+    else if(type === 'chime'){ o.type='sine'; [880,1100,1320].forEach((f,i) => o.frequency.setValueAtTime(f, now + i*.15)); g.gain.setValueAtTime(.2,now); g.gain.exponentialRampToValueAtTime(.01,now+.5); o.start(now); o.stop(now+.5); }
+    else if(type === 'build'){ o.type='triangle'; [392,523.25,659.25].forEach((f,i) => o.frequency.setValueAtTime(f, now + i*.08)); g.gain.setValueAtTime(.2,now); g.gain.exponentialRampToValueAtTime(.01,now+.35); o.start(now); o.stop(now+.35); }
+    else if(type === 'crash'){ o.type='sawtooth'; o.frequency.setValueAtTime(150,now); o.frequency.exponentialRampToValueAtTime(50,now+.5); g.gain.setValueAtTime(.3,now); g.gain.exponentialRampToValueAtTime(.01,now+.5); o.start(now); o.stop(now+.5); }
+    else if(type === 'star'){ o.type='sine'; [1046.5,1318.5,1568].forEach((f,i) => o.frequency.setValueAtTime(f, now + i*.08)); g.gain.setValueAtTime(.18,now); g.gain.exponentialRampToValueAtTime(.01,now+.4); o.start(now); o.stop(now+.4); }
+  } catch(e){}
+}
+function initBengaliVoices(){
+  if('speechSynthesis' in window){
+    const v = window.speechSynthesis.getVoices();
+    availableBengaliVoice = v.find(x => x.lang.toLowerCase().includes('bn') || x.lang.toLowerCase().includes('bangla') || x.lang.toLowerCase().includes('bengali') || x.name.toLowerCase().includes('bengali') || x.name.toLowerCase().includes('bangla')) || null;
+  }
+}
+if('speechSynthesis' in window){ window.speechSynthesis.onvoiceschanged = initBengaliVoices; initBengaliVoices(); }
+function toggleAudio(){ audioEnabled = !audioEnabled; if(!audioEnabled) stopAllSpeech(); else playSound('click'); updateDrawerSound(); }
+function changeSpeechRate(r){ currentSpeechRate = parseFloat(r); playSound('click'); }
+
+function celebrate(msg, starsToAdd = 1){
+  playSound('correct'); playSound('star');
+  if(starsToAdd > 0){ addStars(starsToAdd); }
+  confetti(35); mascotHappy();
+  showMascotMsg(getRandomItem(PRAISES), 2200);
+  speakText(msg || getRandomItem(PRAISES));
+}
+function discourage(){
+  playSound('wrong'); mascotSad();
+  showMascotMsg('আবার চেষ্টা করো! 💪', 2000);
+  speakText(getRandomItem(RETRIES));
+}
+
+/* NUMBERS GRID */
+const NUM_COLORS = ['linear-gradient(135deg,#f97316,#dc2626)','linear-gradient(135deg,#0ea5e9,#0369a1)','linear-gradient(135deg,#10b981,#047857)','linear-gradient(135deg,#8b5cf6,#6d28d9)','linear-gradient(135deg,#ec4899,#be185d)','linear-gradient(135deg,#f59e0b,#b45309)','linear-gradient(135deg,#06b6d4,#0e7490)','linear-gradient(135deg,#84cc16,#4d7c0f)'];
+function renderNumbers(){
+  const g = document.getElementById('numbersGrid');
+  if(!g) return;
+  g.innerHTML = NUMBERS.map((num, i) => {
+    const col = NUM_COLORS[i % NUM_COLORS.length];
+    return `<div onclick="speakNumber(${num.n})" style="background:${col};border-radius:22px;padding:14px;color:#fff;border:4px solid rgba(255,255,255,.85);box-shadow:0 8px 22px rgba(0,0,0,.18);cursor:pointer;transition:all .3s;text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:170px;">
+      <div style="font-size:38px;margin-bottom:4px;">${num.emoji}</div>
+      <div style="font-family:'Galada',cursive;font-size:52px;line-height:1;color:#fff;text-shadow:0 3px 8px rgba(0,0,0,.3);">${toBn(num.n)}</div>
+      <div style="font-size:16px;font-weight:900;margin-top:6px;background:rgba(255,255,255,.28);padding:3px 12px;border-radius:12px;">${num.bn}</div>
+      <div style="font-size:12px;font-weight:800;margin-top:6px;background:rgba(0,0,0,.2);padding:2px 10px;border-radius:10px;">${num.emoji} × ${toBn(num.n)}</div>
+    </div>`;
+  }).join('');
+}
+function speakNumber(n){
+  const num = NUMBERS.find(x => x.n === n);
+  if(!num) return;
+  playSound('chime');
+  speakText(`${num.bn}। ${toBn(num.n)}টি ${num.item}।`);
+}
+function readAllNumbers(){
+  playSound('click');
+  if(!audioEnabled){ showToast('শব্দ বন্ধ আছে'); return; }
+  let idx = 0;
+  function next(){
+    if(idx >= NUMBERS.length){ showToast('✅ সব সংখ্যা পড়া শেষ'); celebrate('চমৎকার! সব সংখ্যা শুনেছো!', 3); return; }
+    const num = NUMBERS[idx];
+    speakText(`${num.bn}। ${toBn(num.n)}`, () => { idx++; setTimeout(next, 300); });
+  }
+  next();
+}
+
+/* WORDS */
+function renderWords(){
+  const g = document.getElementById('wordsGrid');
+  if(!g) return;
+  g.innerHTML = WORDS.map((w, i) => {
+    const col = NUM_COLORS[i % NUM_COLORS.length];
+    return `<div onclick="speakWord(${i})" style="background:${col};border-radius:22px;padding:14px;color:#fff;border:4px solid rgba(255,255,255,.85);box-shadow:0 8px 22px rgba(0,0,0,.18);cursor:pointer;transition:all .3s;text-align:center;min-height:200px;display:flex;flex-direction:column;align-items:center;justify-content:center;">
+      <div style="font-size:44px;">${w.emoji}</div>
+      <div style="font-family:'Galada',cursive;font-size:34px;font-weight:900;">${toBn(w.n)}</div>
+      <div style="font-size:15px;font-weight:900;margin-top:4px;background:rgba(255,255,255,.28);padding:3px 12px;border-radius:12px;">${w.title}</div>
+      <div style="margin-top:8px;background:rgba(255,255,255,.3);padding:6px 10px;border-radius:10px;font-size:13px;font-weight:800;">${w.fact}</div>
+      <div style="margin-top:4px;font-size:11px;font-weight:700;opacity:.95;">${w.sub}</div>
+    </div>`;
+  }).join('');
+}
+function speakWord(i){
+  const w = WORDS[i];
+  playSound('chime');
+  speakText(`${w.title}। ${w.fact}। ${w.sub}।`);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   TRACE — FIXED: strokes stay INSIDE the number
+   ═══════════════════════════════════════════════════════════════ */
+function traceFontStack(){
+  return `900 FONTSIZEpx 'Galada', 'Hind Siliguri', serif`;
+}
+function fitTraceFontSize(ctx, text, maxW, maxH){
+  // Find the largest font size that fits both width and height
+  let size = Math.min(maxW, maxH);
+  for(let i = 0; i < 30; i++){
+    ctx.font = `900 ${size}px 'Galada', 'Hind Siliguri', serif`;
+    const m = ctx.measureText(text);
+    const w = m.width;
+    const h = m.actualBoundingBoxAscent + m.actualBoundingBoxDescent || size;
+    if(w <= maxW * 0.92 && h <= maxH * 0.92) break;
+    size -= Math.max(2, size * 0.05);
+    if(size < 20) { size = 20; break; }
+  }
+  return size;
+}
+function initTrace(){
+  const canvas = document.getElementById('traceCanvas');
+  if(!canvas) return;
+  const wrap = document.getElementById('traceCanvasWrap');
+  const rect = wrap.getBoundingClientRect();
+  const dpr = window.devicePixelRatio || 1;
+  const displayW = Math.max(200, rect.width);
+  const displayH = Math.max(200, rect.height);
+
+  canvas.width = Math.floor(displayW * dpr);
+  canvas.height = Math.floor(displayH * dpr);
+  canvas.style.width = displayW + 'px';
+  canvas.style.height = displayH + 'px';
+
+  const ctx = canvas.getContext('2d');
+
+  // Stroke canvas (offscreen)
+  const strokeCanvas = document.createElement('canvas');
+  strokeCanvas.width = canvas.width;
+  strokeCanvas.height = canvas.height;
+  const strokeCtx = strokeCanvas.getContext('2d');
+  strokeCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  strokeCtx.lineCap = 'round';
+  strokeCtx.lineJoin = 'round';
+
+  // Temp canvas for masking
+  const tmpCanvas = document.createElement('canvas');
+  tmpCanvas.width = canvas.width;
+  tmpCanvas.height = canvas.height;
+  const tmpCtx = tmpCanvas.getContext('2d');
+  tmpCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+  traceState = {
+    currentN: traceState ? traceState.currentN : 1,
+    drawing: false,
+    strokeColor: (traceState && traceState.strokeColor) || '#ef4444',
+    lineWidth: 18,
+    canvas, ctx, dpr,
+    displayW, displayH,
+    strokeCanvas, strokeCtx,
+    tmpCanvas, tmpCtx,
+    lastX: 0, lastY: 0
+  };
+
+  // Fetch font ready
+  if(document.fonts && document.fonts.ready){
+    document.fonts.ready.then(() => {
+      updateTraceLabel();
+      renderTraceCanvas();
+    }).catch(()=>{});
+  }
+
+  updateTraceLabel();
+  renderTraceCanvas();
+
+  canvas.onpointerdown = startStroke;
+  canvas.onpointermove = moveStroke;
+  canvas.onpointerup = endStroke;
+  canvas.onpointerleave = endStroke;
+  canvas.onpointercancel = endStroke;
+  canvas.ontouchstart = (e) => e.preventDefault();
+  canvas.ontouchmove = (e) => e.preventDefault();
+}
+
+function updateTraceLabel(){
+  if(!traceState) return;
+  const num = NUMBERS[traceState.currentN - 1];
+  const nl = document.getElementById('traceNumLabel'); if(nl) nl.innerText = toBn(num.n);
+  const wl = document.getElementById('traceWordLabel'); if(wl) wl.innerText = `(${num.bn})`;
+}
+
+function scheduleTraceRender(){
+  if(traceRenderPending) return;
+  traceRenderPending = true;
+  requestAnimationFrame(() => {
+    traceRenderPending = false;
+    renderTraceCanvas();
+  });
+}
+
+function startStroke(e){
+  if(!traceState) return;
+  e.preventDefault();
+  const rect = traceState.canvas.getBoundingClientRect();
+  traceState.drawing = true;
+  traceState.lastX = e.clientX - rect.left;
+  traceState.lastY = e.clientY - rect.top;
+  // Dot for initial touch
+  const sCtx = traceState.strokeCtx;
+  sCtx.fillStyle = traceState.strokeColor;
+  sCtx.beginPath();
+  sCtx.arc(traceState.lastX, traceState.lastY, traceState.lineWidth / 2, 0, Math.PI * 2);
+  sCtx.fill();
+  renderTraceCanvas();
+  playSound('click');
+}
+
+function moveStroke(e){
+  if(!traceState || !traceState.drawing) return;
+  e.preventDefault();
+  const rect = traceState.canvas.getBoundingClientRect();
+  const x = e.clientX - rect.left;
+  const y = e.clientY - rect.top;
+  const sCtx = traceState.strokeCtx;
+  sCtx.strokeStyle = traceState.strokeColor;
+  sCtx.lineWidth = traceState.lineWidth;
+  sCtx.lineCap = 'round';
+  sCtx.lineJoin = 'round';
+  sCtx.beginPath();
+  sCtx.moveTo(traceState.lastX, traceState.lastY);
+  sCtx.lineTo(x, y);
+  sCtx.stroke();
+  traceState.lastX = x;
+  traceState.lastY = y;
+  scheduleTraceRender();
+}
+
+function endStroke(e){
+  if(!traceState) return;
+  traceState.drawing = false;
+}
+
+function renderTraceCanvas(){
+  const s = traceState;
+  if(!s) return;
+  const { canvas, ctx, strokeCanvas, tmpCanvas, tmpCtx, dpr, displayW, displayH } = s;
+  const W = canvas.width, H = canvas.height;
+  const numText = toBn(s.currentN);
+  const cx = displayW / 2;
+  const cy = displayH / 2;
+
+  // Determine font size
+  const fontSize = fitTraceFontSize(ctx, numText, displayW, displayH);
+  s._fontSize = fontSize;
+
+  // 1) Clear visible canvas
+  ctx.save();
+  ctx.setTransform(1, 0, 0, 1, 0, 0);
+  ctx.clearRect(0, 0, W, H);
+  ctx.restore();
+
+  // 2) Draw the number as a "guide" background (light blue outline + fill)
+  ctx.save();
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  ctx.font = `900 ${fontSize}px 'Galada', 'Hind Siliguri', serif`;
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.fillStyle = '#e0f2fe';
+  ctx.fillText(numText, cx, cy);
+  ctx.lineWidth = 4;
+  ctx.strokeStyle = '#7dd3fc';
+  ctx.strokeText(numText, cx, cy);
+  ctx.restore();
+
+  // 3) Build masked strokes into tmpCanvas:
+  //    a) copy raw strokes
+  //    b) apply number as mask (destination-in)
+  tmpCtx.save();
+  tmpCtx.setTransform(1, 0, 0, 1, 0, 0);
+  tmpCtx.clearRect(0, 0, W, H);
+  tmpCtx.drawImage(strokeCanvas, 0, 0);
+  // Apply the number mask
+  tmpCtx.globalCompositeOperation = 'destination-in';
+  tmpCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  tmpCtx.font = `900 ${fontSize}px 'Galada', 'Hind Siliguri', serif`;
+  tmpCtx.textAlign = 'center';
+  tmpCtx.textBaseline = 'middle';
+  tmpCtx.fillStyle = '#000';
+  tmpCtx.fillText(numText, cx, cy);
+  tmpCtx.restore();
+
+  // 4) Draw masked strokes onto visible canvas
+  ctx.save();
+  ctx.setTransform(1, 0, 0, 1, 0, 0);
+  ctx.drawImage(tmpCanvas, 0, 0);
+  ctx.restore();
+}
+
+function clearTrace(){
+  if(!traceState) return;
+  const s = traceState;
+  s.strokeCtx.save();
+  s.strokeCtx.setTransform(1, 0, 0, 1, 0, 0);
+  s.strokeCtx.clearRect(0, 0, s.strokeCanvas.width, s.strokeCanvas.height);
+  s.strokeCtx.restore();
+  renderTraceCanvas();
+}
+function traceStrokeColor(c){
+  if(traceState) traceState.strokeColor = c;
+  // Highlight selected color
+  document.querySelectorAll('.trace-color-btn').forEach(b => {
+    b.classList.remove('ring-4','ring-purple-400','scale-125');
+  });
+  const btn = document.querySelector(`.trace-color-btn[data-c="${c}"]`);
+  if(btn) btn.classList.add('ring-4','ring-purple-400','scale-125');
+  playSound('click');
+}
+function prevTrace(){
+  if(!traceState) return;
+  traceState.currentN = traceState.currentN > 1 ? traceState.currentN - 1 : 20;
+  clearTrace(); updateTraceLabel();
+  playSound('click');
+  speakText(toBn(traceState.currentN));
+}
+function nextTrace(){
+  if(!traceState) return;
+  traceState.currentN = traceState.currentN < 20 ? traceState.currentN + 1 : 1;
+  clearTrace(); updateTraceLabel();
+  playSound('click');
+  speakText(toBn(traceState.currentN));
+}
+function checkTrace(){
+  if(!traceState) return;
+  counters.traces++;
+  saveCounters();
+  celebrate(`চমৎকার! ${toBn(traceState.currentN)} লিখেছো!`, 2);
+  checkBadges();
+  setTimeout(() => nextTrace(), 1500);
+}
+
+/* QUIZ */
+function startQuiz(){
+  playSound('click');
+  const sb = document.getElementById('quizStartBox'); if(sb) sb.classList.add('hidden');
+  const gb = document.getElementById('quizGameBox'); if(gb) gb.classList.remove('hidden');
+  const questions = [];
+  const nums = []; for(let i = 1; i <= 20; i++) nums.push(i);
+  nums.sort(() => Math.random() - 0.5);
+  nums.forEach(n => {
+    const num = NUMBERS[n - 1];
+    const tpl = QUIZ_TEMPLATES[Math.floor(Math.random() * QUIZ_TEMPLATES.length)];
+    const q = tpl(num);
+    const opts = [q.correct, ...q.wrongs].sort(() => Math.random() - 0.5);
+    questions.push({ question: q.q, correct: q.correct, options: opts, num: n });
+  });
+  quizState = { questions, qIdx: 0, score: 0, wrongs: 0, answered: false };
+  updateQuizUI();
+}
+function updateQuizUI(){
+  if(!quizState) return;
+  const q = quizState.questions[quizState.qIdx];
+  if(!q){ endQuiz(); return; }
+  const qEl = document.getElementById('quizQuestion');
+  const oEl = document.getElementById('quizOptions');
+  const qi = document.getElementById('qIdxLabel');
+  const sc = document.getElementById('quizScore');
+  if(qi) qi.innerText = toBn(quizState.qIdx + 1);
+  if(sc) sc.innerText = toBn(quizState.score);
+  if(qEl) qEl.textContent = q.question;
+  quizState.answered = false;
+  if(oEl){
+    oEl.innerHTML = q.options.map(opt => `<button onclick="answerQuiz('${opt}')" class="bg-gradient-to-br from-emerald-100 to-teal-100 hover:from-emerald-200 hover:to-teal-200 text-emerald-900 font-black px-4 py-4 rounded-2xl text-lg border-3 border-emerald-300 transition active:scale-95 shadow-md" style="border-width:3px;">${opt}</button>`).join('');
+  }
+  speakText(q.question);
+}
+function answerQuiz(opt){
+  if(!quizState || quizState.answered) return;
+  const q = quizState.questions[quizState.qIdx];
+  const ok = (opt === q.correct);
+  quizState.answered = true;
+  const fb = document.getElementById('quizFeedback');
+  if(ok){
+    counters.quiz_correct++; saveCounters();
+    celebrate(`${q.correct}। ${getRandomItem(PRAISES)}`, 2);
+    quizState.score++;
+    const sc = document.getElementById('quizScore'); if(sc) sc.innerText = toBn(quizState.score);
+    document.querySelectorAll('#quizOptions button').forEach(b => { if(b.textContent.trim() === q.correct){ b.style.background = 'linear-gradient(135deg,#10b981,#059669)'; b.style.color = '#fff'; } });
+    if(fb){ fb.classList.remove('hidden'); fb.className = 'text-center font-black p-3 mt-4 rounded-2xl bg-emerald-100 text-emerald-800 animate-praise'; fb.innerText = `✅ সঠিক! ${q.correct}`; }
+    checkBadges();
+    setTimeout(() => { quizState.qIdx++; if(fb) fb.classList.add('hidden'); if(quizState.qIdx >= quizState.questions.length){ endQuiz(); return; } updateQuizUI(); }, 1300);
+  } else {
+    quizState.wrongs++;
+    discourage();
+    document.querySelectorAll('#quizOptions button').forEach(b => { if(b.textContent.trim() === opt){ b.style.background = 'linear-gradient(135deg,#ef4444,#b91c1c)'; b.style.color = '#fff'; } if(b.textContent.trim() === q.correct){ b.style.background = 'linear-gradient(135deg,#10b981,#059669)'; b.style.color = '#fff'; } });
+    if(fb){ fb.classList.remove('hidden'); fb.className = 'text-center font-black p-3 mt-4 rounded-2xl bg-rose-100 text-rose-800'; fb.innerText = `❌ ভুল! সঠিক: ${q.correct}`; }
+    setTimeout(() => { quizState.qIdx++; if(fb) fb.classList.add('hidden'); if(quizState.qIdx >= quizState.questions.length){ endQuiz(); return; } updateQuizUI(); }, 1600);
+  }
+}
+function endQuiz(){
+  const qEl = document.getElementById('quizQuestion');
+  const oEl = document.getElementById('quizOptions');
+  const fb = document.getElementById('quizFeedback');
+  if(qEl) qEl.textContent = '🏆 কুইজ শেষ!';
+  if(oEl) oEl.innerHTML = '';
+  const perfect = quizState.wrongs === 0;
+  if(perfect) counters.perfect_quiz++;
+  saveCounters();
+  if(fb){
+    fb.classList.remove('hidden');
+    fb.className = 'text-center font-black p-4 mt-4 rounded-2xl bg-amber-100 text-amber-900';
+    fb.innerHTML = `তোমার স্কোর: <span style="font-size:24px;color:#b45309">${toBn(quizState.score)}/${toBn(quizState.questions.length)}</span>${perfect ? '<br>🌟 পারফেক্ট! কোনো ভুল হয়নি!' : ''}<br><button onclick="startQuiz()" class="mt-3 bg-amber-500 hover:bg-amber-400 text-white font-black px-6 py-2 rounded-xl">আবার খেলুন</button>`;
+  }
+  celebrate(`${getNamePrefix()}খেলা শেষ! ${toBn(quizState.score)} নম্বর!`, perfect ? 10 : 5);
+  checkBadges();
+}
+
+/* COUNT */
+function newCountQuestion(){
+  playSound('click');
+  const num = Math.floor(Math.random() * 20) + 1;
+  const numData = NUMBERS[num - 1];
+  const emojiPool = ['🍎','⭐','🎈','🌸','🦋','🍭','🐤','🌻','🍇','🎁','🐠','🧁','🍓','⚽','🎀','🦄','🌈','🍦','🐞','🍀'];
+  const emoji = emojiPool[Math.floor(Math.random() * emojiPool.length)];
+  const wrongs = [];
+  while(wrongs.length < 3){ const w = Math.floor(Math.random() * 20) + 1; if(w !== num && !wrongs.includes(w)) wrongs.push(w); }
+  const options = [num, ...wrongs].sort(() => Math.random() - 0.5);
+  countState = { num, emoji, options, tapped: 0, answered: false };
+  const tapArea = document.getElementById('countTapArea');
+  const numBtns = document.getElementById('countNumBtns');
+  const prompt = document.getElementById('countPrompt');
+  const fb = document.getElementById('countFeedback');
+  if(fb) fb.classList.add('hidden');
+  if(prompt) prompt.innerHTML = `নিচের <strong>${numData.item}</strong> গুনে সঠিক সংখ্যায় টাচ করো!`;
+  let html = '';
+  for(let i = 0; i < num; i++){ html += `<span class="count-emoji" id="countEmoji-${i}" onclick="tapCountEmoji(${i})">${emoji}</span>`; }
+  tapArea.innerHTML = html;
+  numBtns.innerHTML = options.map(o => `<button onclick="answerCount(${o})" class="count-num-btn" id="countBtn-${o}">${toBn(o)}</button>`).join('');
+  speakText(`নিচের ${numData.item} গুনে সঠিক সংখ্যায় টাচ করো।`);
+}
+function tapCountEmoji(i){
+  if(!countState || countState.answered) return;
+  const el = document.getElementById('countEmoji-' + i);
+  if(!el || el.classList.contains('tapped')) return;
+  el.classList.add('tapped'); el.classList.add('pulse');
+  setTimeout(() => el.classList.remove('pulse'), 500);
+  countState.tapped++;
+  playSound('click');
+  speakText(toBn(countState.tapped));
+}
+function answerCount(opt){
+  if(!countState || countState.answered) return;
+  const ok = (opt === countState.num);
+  countState.answered = true;
+  const fb = document.getElementById('countFeedback');
+  const btn = document.getElementById('countBtn-' + opt);
+  const correctBtn = document.getElementById('countBtn-' + countState.num);
+  if(ok){
+    counters.count_correct++; saveCounters();
+    if(btn) btn.classList.add('correct');
+    celebrate(`সঠিক! ${toBn(countState.num)}টি ${NUMBERS[countState.num-1].item}!`, 2);
+    if(fb){ fb.classList.remove('hidden'); fb.className = 'text-center font-black p-3 mt-4 rounded-2xl bg-emerald-100 text-emerald-800 animate-praise'; fb.innerText = `✅ সঠিক! ${toBn(countState.num)}টি। ${getRandomItem(PRAISES)}`; }
+    checkBadges();
+    setTimeout(() => newCountQuestion(), 2200);
+  } else {
+    if(btn) btn.classList.add('wrong');
+    if(correctBtn) correctBtn.classList.add('correct');
+    discourage();
+    if(fb){ fb.classList.remove('hidden'); fb.className = 'text-center font-black p-3 mt-4 rounded-2xl bg-rose-100 text-rose-800'; fb.innerText = `❌ ভুল! সঠিক: ${toBn(countState.num)}টি।`; }
+    setTimeout(() => newCountQuestion(), 2400);
+  }
+}
+
+/* MEMORY */
+function startMemoryGame(){
+  playSound('click');
+  const picked = [...NUMBERS].sort(() => Math.random() - 0.5).slice(0, 6);
+  const cards = [];
+  picked.forEach((p, i) => {
+    cards.push({ pairId: i, type: 'num', display: toBn(p.n), color: NUM_COLORS[i % NUM_COLORS.length] });
+    cards.push({ pairId: i, type: 'word', display: p.bn, color: NUM_COLORS[i % NUM_COLORS.length] });
+  });
+  cards.sort(() => Math.random() - 0.5);
+  memoryState = { cards, flipped: [], matched: 0, moves: 0, total: 6, locked: false, picked };
+  renderMemory(); updateMemoryScore();
+  const fb = document.getElementById('memoryFeedback'); if(fb) fb.classList.add('hidden');
+}
+function renderMemory(){
+  const g = document.getElementById('memoryGrid');
+  if(!g || !memoryState) return;
+  g.innerHTML = memoryState.cards.map((c, i) => `
+    <div class="memory-card" id="mc-${i}" onclick="flipMemory(${i})">
+      <div class="mc-inner">
+        <div class="mc-front">❓</div>
+        <div class="mc-back" style="background:${c.color};color:#fff;">${c.display}</div>
+      </div>
+    </div>
+  `).join('');
+}
+function updateMemoryScore(){
+  const ms = document.getElementById('memoryScore'); if(ms) ms.innerText = `${toBn(memoryState.matched)}/${toBn(memoryState.total)}`;
+  const mm = document.getElementById('memoryMoves'); if(mm) mm.innerText = toBn(memoryState.moves);
+}
+function flipMemory(i){
+  if(!memoryState || memoryState.locked) return;
+  const card = memoryState.cards[i];
+  const el = document.getElementById('mc-' + i);
+  if(!el || el.classList.contains('flipped') || el.classList.contains('matched')) return;
+  el.classList.add('flipped');
+  playSound('click');
+  memoryState.flipped.push(i);
+  if(memoryState.flipped.length === 2){
+    memoryState.locked = true;
+    memoryState.moves++; updateMemoryScore();
+    const [a, b] = memoryState.flipped;
+    const ca = memoryState.cards[a], cb = memoryState.cards[b];
+    if(ca.pairId === cb.pairId && ca.type !== cb.type){
+      setTimeout(() => {
+        const ea = document.getElementById('mc-' + a), eb = document.getElementById('mc-' + b);
+        if(ea) ea.classList.add('matched');
+        if(eb) eb.classList.add('matched');
+        memoryState.matched++; memoryState.flipped = []; memoryState.locked = false;
+        updateMemoryScore();
+        celebrate(`জোড়া মিলেছে! ${ca.display} ↔ ${cb.display}`, 1);
+        if(memoryState.matched === memoryState.total){
+          counters.memory_wins++; saveCounters(); checkBadges();
+          setTimeout(() => {
+            const fb = document.getElementById('memoryFeedback');
+            if(fb){ fb.classList.remove('hidden'); fb.className = 'text-center font-black p-4 rounded-2xl bg-emerald-100 text-emerald-800 animate-praise'; fb.innerHTML = `🏆 অসাধারণ! ${toBn(memoryState.moves)} চালে সব জোড়া মিলিয়েছো!<br><button onclick="startMemoryGame()" class="mt-3 bg-amber-500 text-white font-black px-6 py-2 rounded-xl">আবার খেলো</button>`; }
+            fireworks(window.innerWidth/2, window.innerHeight/2);
+            celebrate(`${getNamePrefix()}অসাধারণ! সব জোড়া মিলিয়েছো!`, 10);
+          }, 500);
+        }
+      }, 600);
+    } else {
+      setTimeout(() => {
+        const ea = document.getElementById('mc-' + a), eb = document.getElementById('mc-' + b);
+        if(ea) ea.classList.remove('flipped');
+        if(eb) eb.classList.remove('flipped');
+        memoryState.flipped = []; memoryState.locked = false;
+        playSound('wrong');
+      }, 1100);
+    }
+  }
+}
+
+/* BLANK */
+function wordToNum(w){
+  const map = {'এক':1,'দুই':2,'তিন':3,'চার':4,'পাঁচ':5,'ছয়':6,'সাত':7,'আট':8,'নয়':9,'দশ':10,'এগারো':11,'বারো':12,'তেরো':13,'চৌদ্দ':14,'পনেরো':15,'ষোলো':16,'সতেরো':17,'আঠারো':18,'উনিশ':19,'বিশ':20};
+  return map[w] || 1;
+}
+function generateBlankTables(){
+  const pairs = [['তিন','পাঁচ','সাত'],['নয়','এগারো','তেরো'],['ষোলো','আঠারো','বিশ'],['দুই','চার','ছয়'],['দশ','বারো','চৌদ্দ']];
+  pairs.sort(() => Math.random() - 0.5);
+  const tables = [];
+  for(let i = 0; i < 3; i++){
+    const p = pairs[i];
+    const n0 = wordToNum(p[0]), n1 = wordToNum(p[1]);
+    tables.push({ row1: [p[0], '?', p[1], '?', p[2]], answers: [n0+1, n1+1] });
+  }
+  return tables;
+}
+function newBlankGame(){ playSound('click'); blankAnswers = {}; blankTables = generateBlankTables(); renderBlank(); }
+function renderBlank(){
+  const c = document.getElementById('blankTables');
+  if(!c) return;
+  if(!blankTables || blankTables.length === 0) blankTables = generateBlankTables();
+  c.innerHTML = blankTables.map((t, ti) => {
+    const rowCells = t.row1.map((cell, ci) => {
+      if(cell === '?'){
+        const key = ti + '-' + ci;
+        const a = blankAnswers[key];
+        let cls = 'blank-box';
+        if(a){ if(a.isCorrect) cls += ' correct'; else cls += ' wrong'; }
+        return `<td class="p-1"><div class="${cls}" onclick="openBlankPicker('${key}', ${ti}, ${ci})">${a ? toBn(a.value) : '?'}</div></td>`;
+      }
+      return `<td class="p-1"><div class="blank-box filled">${cell}</div></td>`;
+    }).join('');
+    return `<div class="bg-white rounded-2xl p-3 border-4 border-amber-200 shadow-md"><table class="w-full"><tr>${rowCells}</tr></table></div>`;
+  }).join('');
+  updateBlankScore();
+}
+function openBlankPicker(key, ti, ci){
+  playSound('click');
+  const t = blankTables[ti];
+  let qIdx = 0;
+  for(let i = 0; i < ci; i++) if(t.row1[i] === '?') qIdx++;
+  const correct = t.answers[qIdx];
+  const options = [];
+  for(let v = Math.max(1, correct - 3); v <= Math.min(20, correct + 3); v++){ if(v !== correct) options.push(v); }
+  options.sort(() => Math.random() - 0.5);
+  const shown = [correct, ...options.slice(0, 5)].sort(() => Math.random() - 0.5);
+  const picker = document.createElement('div');
+  picker.style.cssText = 'position:fixed;inset:0;z-index:100;background:rgba(15,23,42,.7);backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;padding:16px;';
+  picker.innerHTML = `<div style="background:#fff;border-radius:22px;padding:20px;max-width:340px;width:100%;border:4px solid #f59e0b;">
+    <h3 style="font-weight:900;color:#78350f;text-align:center;margin-bottom:14px;font-size:16px;">সঠিক সংখ্যাটি বেছে নাও</h3>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;">
+      ${shown.map(o => `<button onclick="pickBlank('${key}', ${o}, ${correct})" style="padding:14px;border-radius:14px;border:3px solid #0284c7;background:#f0f9ff;color:#0284c7;font-weight:900;font-size:22px;cursor:pointer;">${toBn(o)}</button>`).join('')}
+    </div>
+    <button onclick="this.parentElement.parentElement.remove()" style="width:100%;margin-top:14px;padding:10px;border-radius:12px;border:none;background:#475569;color:#fff;font-weight:900;cursor:pointer;">বাতিল</button>
+  </div>`;
+  document.body.appendChild(picker);
+}
+function pickBlank(key, val, correct){
+  const ok = (val === correct);
+  blankAnswers[key] = { value: val, isCorrect: ok };
+  if(ok){ celebrate(`${toBn(val)} সঠিক!`, 1); } else { discourage(); }
+  document.querySelectorAll('div[style*="z-index:100"]').forEach(el => el.remove());
+  renderBlank(); checkBadges();
+}
+function updateBlankScore(){
+  const total = Object.values(blankAnswers).filter(a => a.isCorrect).length;
+  const totalBlanks = blankTables.reduce((s, t) => s + t.answers.length, 0);
+  const el = document.getElementById('blankScore');
+  if(el) el.innerText = `${toBn(total)}/${toBn(totalBlanks)}`;
+}
+
+/* NIGHT SKY */
+function initNightGame(){
+  const canvas = document.getElementById('nightSkyCanvas');
+  if(!canvas) return;
+  const rect = canvas.getBoundingClientRect();
+  canvas.width = rect.width; canvas.height = 420;
+  const questions = [];
+  const nums = []; for(let i = 1; i <= 20; i++) nums.push(i);
+  nums.sort(() => Math.random() - 0.5);
+  nums.forEach(n => {
+    const num = NUMBERS[n - 1];
+    const tpl = QUIZ_TEMPLATES[Math.floor(Math.random() * QUIZ_TEMPLATES.length)];
+    const q = tpl(num);
+    const opts = [q.correct, ...q.wrongs].sort(() => Math.random() - 0.5);
+    questions.push({ question: q.q, correct: q.correct, options: opts, num: n });
+  });
+  const stars = [];
+  for(let i = 0; i < 180; i++) stars.push({ x: Math.random() * canvas.width, y: Math.random() * canvas.height, r: 0.4 + Math.random() * 1.4, phase: Math.random() * Math.PI * 2, speed: 0.5 + Math.random() * 2 });
+  const numDecos = [];
+  for(let i = 1; i <= 20; i++) numDecos.push({ n: i, x: 60 + Math.random() * (canvas.width - 120), y: 60 + Math.random() * (canvas.height - 120), size: 18 + Math.random() * 12, phase: Math.random() * Math.PI * 2, lit: false, flashUntil: 0 });
+  nightState = { questions, qIdx: 0, score: 0, stars, numDecos, currentGlow: 0, lastTime: performance.now(), shakeTime: 0 };
+  updateNightQuestion(); updateNightScore(); startNightLoop();
+}
+function updateNightQuestion(){
+  if(!nightState) return;
+  const q = nightState.questions[nightState.qIdx];
+  if(!q){ endNightGame(); return; }
+  const qEl = document.getElementById('nightQuestion');
+  const oEl = document.getElementById('nightOptions');
+  const qi = document.getElementById('nightQIdxLabel');
+  if(qi) qi.innerText = toBn(nightState.qIdx + 1);
+  if(qEl) qEl.textContent = q.question;
+  if(oEl) oEl.innerHTML = q.options.map(opt => `<button onclick="answerNight('${opt}')" class="bg-white/20 hover:bg-white/35 text-white font-black px-5 py-2.5 rounded-2xl text-lg border-2 border-white/40 transition active:scale-95">${opt}</button>`).join('');
+}
+function answerNight(opt){
+  if(!nightState) return;
+  const q = nightState.questions[nightState.qIdx];
+  if(!q) return;
+  const ok = (opt === q.correct);
+  const fb = document.getElementById('nightFeedback');
+  if(ok){
+    const deco = nightState.numDecos.find(d => d.n === q.num);
+    if(deco){ deco.lit = true; deco.flashUntil = performance.now() + 1500; }
+    nightState.score++; nightState.currentGlow = 1.0;
+    updateNightScore();
+    celebrate(`সঠিক! ${q.correct} — তারা জ্বলে উঠল!`, 2);
+    if(fb){ fb.classList.remove('hidden'); fb.style.background = 'linear-gradient(135deg,#10b981,#059669)'; fb.textContent = `✨ সঠিক! ${q.correct}`; }
+    setTimeout(() => { if(!nightState) return; nightState.qIdx++; if(nightState.qIdx >= nightState.questions.length){ endNightGame(); return; } updateNightQuestion(); if(fb) fb.classList.add('hidden'); }, 1400);
+  } else {
+    nightState.shakeTime = 0.5;
+    discourage();
+    if(fb){ fb.classList.remove('hidden'); fb.style.background = 'linear-gradient(135deg,#ef4444,#b91c1c)'; fb.textContent = `❌ ভুল!`; }
+    setTimeout(() => { if(fb) fb.classList.add('hidden'); }, 1400);
+  }
+}
+function updateNightScore(){ const s = document.getElementById('nightScore'); if(s) s.innerText = toBn(nightState ? nightState.score : 0); }
+function endNightGame(){
+  const fb = document.getElementById('nightFeedback');
+  if(fb){ fb.classList.remove('hidden'); fb.style.background = 'linear-gradient(135deg,#fbbf24,#f59e0b)'; fb.textContent = `🏆 শেষ! স্কোর: ${toBn(nightState.score)}/${toBn(nightState.questions.length)}`; }
+  celebrate(`${getNamePrefix()}তুমি ${toBn(nightState.score)} নম্বর পেয়েছ!`, 5);
+}
+function restartNightGame(){ playSound('click'); stopNightGame(); setTimeout(() => initNightGame(), 200); }
+function stopNightGame(){ if(nightAnimId){ cancelAnimationFrame(nightAnimId); nightAnimId = null; } }
+function startNightLoop(){
+  if(nightAnimId) cancelAnimationFrame(nightAnimId);
+  function loop(now){
+    if(!nightState) return;
+    const dt = Math.min((now - nightState.lastTime) / 1000, 0.05);
+    nightState.lastTime = now;
+    nightState.numDecos.forEach(d => { d.phase += dt * 1.5; });
+    if(nightState.currentGlow > 0) nightState.currentGlow = Math.max(0, nightState.currentGlow - dt * 0.8);
+    if(nightState.shakeTime > 0) nightState.shakeTime = Math.max(0, nightState.shakeTime - dt);
+    drawNightSky(now);
+    nightAnimId = requestAnimationFrame(loop);
+  }
+  nightAnimId = requestAnimationFrame(loop);
+}
+function drawNightSky(now){
+  const canvas = document.getElementById('nightSkyCanvas');
+  if(!canvas || !nightState) return;
+  const ctx = canvas.getContext('2d');
+  const W = canvas.width, H = canvas.height;
+  if(nightState.shakeTime > 0){ ctx.save(); ctx.translate(Math.sin(now * 0.05) * nightState.shakeTime * 8, 0); }
+  const skyGrad = ctx.createLinearGradient(0, 0, 0, H);
+  skyGrad.addColorStop(0, '#0a0e27'); skyGrad.addColorStop(0.5, '#1a1f4d'); skyGrad.addColorStop(1, '#2a1f4d');
+  ctx.fillStyle = skyGrad; ctx.fillRect(0, 0, W, H);
+  ctx.save(); ctx.shadowColor = 'rgba(255,240,180,.9)'; ctx.shadowBlur = 40; ctx.fillStyle = '#fff8d6';
+  ctx.beginPath(); ctx.arc(W * 0.88, H * 0.16, 32, 0, Math.PI * 2); ctx.fill(); ctx.restore();
+  ctx.fillStyle = 'rgba(200,190,150,.35)';
+  ctx.beginPath(); ctx.arc(W*0.88 - 10, H*0.16 - 6, 6, 0, Math.PI*2); ctx.fill();
+  ctx.beginPath(); ctx.arc(W*0.88 + 8, H*0.16 + 8, 4, 0, Math.PI*2); ctx.fill();
+  nightState.stars.forEach(s => {
+    const a = 0.3 + 0.7 * Math.abs(Math.sin(now * 0.001 * s.speed + s.phase));
+    ctx.fillStyle = `rgba(255,255,255,${a})`;
+    ctx.beginPath(); ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2); ctx.fill();
+  });
+  nightState.numDecos.forEach(d => {
+    const pulse = 1 + 0.08 * Math.sin(d.phase);
+    if(d.lit){
+      const flash = d.flashUntil && now < d.flashUntil ? (1 - (d.flashUntil - now) / 1500) : 1;
+      const glowSize = d.size * pulse * (1.4 + flash * 0.8);
+      ctx.save();
+      ctx.shadowColor = `rgba(251,191,36,${0.9 * flash})`;
+      ctx.shadowBlur = 30 * flash + 15;
+      const g = ctx.createRadialGradient(d.x, d.y, 0, d.x, d.y, glowSize * 2.2);
+      g.addColorStop(0, `rgba(251,191,36,${0.45 * flash})`);
+      g.addColorStop(0.5, `rgba(251,191,36,${0.15 * flash})`);
+      g.addColorStop(1, 'rgba(251,191,36,0)');
+      ctx.fillStyle = g; ctx.beginPath(); ctx.arc(d.x, d.y, glowSize * 2.2, 0, Math.PI * 2); ctx.fill();
+      ctx.fillStyle = `rgba(255,237,180,${0.8 + 0.2 * flash})`;
+      ctx.font = `900 ${d.size * pulse}px 'Galada', serif`;
+      ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+      ctx.fillText(toBn(d.n), d.x, d.y);
+      ctx.restore();
+    } else {
+      ctx.fillStyle = 'rgba(180,190,220,.16)';
+      ctx.font = `700 ${d.size}px 'Galada', serif`;
+      ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+      ctx.fillText(toBn(d.n), d.x, d.y);
+    }
+  });
+  if(nightState.currentGlow > 0){ ctx.save(); ctx.fillStyle = `rgba(251,191,36,${0.15 * nightState.currentGlow})`; ctx.fillRect(0, 0, W, H); ctx.restore(); }
+  if(nightState.shakeTime > 0) ctx.restore();
+}
+
+/* TOWER */
+function initTowerGame(){
+  const canvas = document.getElementById('towerCanvas');
+  if(!canvas) return;
+  const rect = canvas.getBoundingClientRect();
+  canvas.width = rect.width; canvas.height = 540;
+  const questions = [];
+  for(let i = 0; i < 100; i++){
+    const n = Math.floor(Math.random() * 20) + 1;
+    const num = NUMBERS[n - 1];
+    const tpl = QUIZ_TEMPLATES[Math.floor(Math.random() * QUIZ_TEMPLATES.length)];
+    const q = tpl(num);
+    const opts = [q.correct, ...q.wrongs].sort(() => Math.random() - 0.5);
+    questions.push({ question: q.q, correct: q.correct, options: opts, num: n });
+  }
+  towerState = { questions, qIdx: 0, score: 0, floors: 0, maxFloors: 20, floorAnimation: 0, floorAnimStart: 0, crashAnimation: 0, clouds: [], birds: [], lastTime: performance.now(), completed: false };
+  for(let i = 0; i < 8; i++) towerState.clouds.push({ x: Math.random() * canvas.width, y: 30 + Math.random() * 100, size: 0.5 + Math.random() * 0.6, speed: 0.2 + Math.random() * 0.4, phase: Math.random() * Math.PI * 2 });
+  for(let i = 0; i < 4; i++) towerState.birds.push({ x: Math.random() * canvas.width, y: 60 + Math.random() * 80, phase: Math.random() * Math.PI * 2 });
+  const wo = document.getElementById('towerWinOverlay'); if(wo){ wo.classList.add('hidden'); wo.classList.remove('flex'); }
+  updateTowerQuestion(); updateTowerScore(); startTowerLoop();
+}
+function updateTowerQuestion(){
+  if(!towerState) return;
+  const q = towerState.questions[towerState.qIdx];
+  if(!q) return;
+  const qEl = document.getElementById('towerQuestion');
+  const oEl = document.getElementById('towerOptions');
+  const qi = document.getElementById('towerQIdx');
+  if(qi) qi.innerText = toBn(towerState.qIdx + 1);
+  if(qEl) qEl.textContent = q.question;
+  if(oEl) oEl.innerHTML = q.options.map(opt => `<button onclick="answerTower('${opt}')" class="bg-rose-100 hover:bg-rose-200 text-rose-900 font-black px-5 py-2.5 rounded-2xl text-lg border-2 border-rose-400 transition active:scale-95 shadow-sm">${opt}</button>`).join('');
+}
+function answerTower(opt){
+  if(!towerState || towerState.completed) return;
+  const q = towerState.questions[towerState.qIdx];
+  if(!q) return;
+  const ok = (opt === q.correct);
+  const fb = document.getElementById('towerFeedback');
+  if(ok){
+    playSound('build');
+    towerState.score++;
+    if(towerState.floors < towerState.maxFloors){ towerState.floors++; towerState.floorAnimation = 1.0; towerState.floorAnimStart = performance.now(); }
+    updateTowerScore();
+    mascotHappy();
+    addStars(1);
+    showMascotMsg(`ভবন এখন ${toBn(towerState.floors)} তলা! 🏢`);
+    if(fb){ fb.classList.remove('hidden'); fb.style.background = 'linear-gradient(135deg,#10b981,#059669)'; fb.textContent = `✅ সঠিক! ভবন এখন ${toBn(towerState.floors)} তলা!`; }
+    speakText(`সঠিক! ভবন এখন ${toBn(towerState.floors)} তলা!`);
+    setTimeout(() => {
+      if(!towerState) return;
+      towerState.qIdx++;
+      if(towerState.qIdx >= towerState.questions.length){ towerState.qIdx = 0; towerState.questions.sort(() => Math.random() - 0.5); }
+      if(towerState.floors >= towerState.maxFloors){ showTowerWin(); return; }
+      updateTowerQuestion();
+      if(fb) fb.classList.add('hidden');
+    }, 1300);
+  } else {
+    playSound('crash');
+    towerState.crashAnimation = 0.6;
+    if(towerState.floors > 0) towerState.floors--;
+    updateTowerScore();
+    discourage();
+    if(fb){ fb.classList.remove('hidden'); fb.style.background = 'linear-gradient(135deg,#ef4444,#b91c1c)'; fb.textContent = `❌ ভুল! তলা ভেঙে গেল। এখন ${toBn(towerState.floors)} তলা।`; }
+    setTimeout(() => {
+      if(!towerState) return;
+      towerState.qIdx++;
+      if(towerState.qIdx >= towerState.questions.length){ towerState.qIdx = 0; towerState.questions.sort(() => Math.random() - 0.5); }
+      updateTowerQuestion();
+      if(fb) fb.classList.add('hidden');
+    }, 1600);
+  }
+}
+function updateTowerScore(){ const f = document.getElementById('towerFloor'); if(f) f.innerText = `${toBn(towerState.floors)}/${toBn(towerState.maxFloors)}`; }
+function showTowerWin(){
+  if(!towerState) return;
+  towerState.completed = true;
+  counters.tower_wins++; saveCounters();
+  const wo = document.getElementById('towerWinOverlay');
+  const wm = document.getElementById('towerWinMsg');
+  if(wm) wm.innerText = `${getNamePrefix()}তুমি ২০ তলা ভবন বানিয়েছ! তুমি একজন দক্ষ ইঞ্জিনিয়ার! 🏆`;
+  if(wo){ wo.classList.remove('hidden'); wo.classList.add('flex'); }
+  confetti(80); fireworks(window.innerWidth/2, window.innerHeight/2);
+  celebrate(`${getNamePrefix()}সাবাস! ২০ তলা ভবন তৈরি!`, 15);
+  checkBadges();
+}
+function restartTowerGame(){ playSound('click'); stopTowerGame(); setTimeout(() => initTowerGame(), 250); }
+function stopTowerGame(){ if(towerAnimId){ cancelAnimationFrame(towerAnimId); towerAnimId = null; } }
+function startTowerLoop(){
+  if(towerAnimId) cancelAnimationFrame(towerAnimId);
+  function loop(now){
+    if(!towerState) return;
+    const dt = Math.min((now - towerState.lastTime) / 1000, 0.05);
+    towerState.lastTime = now;
+    if(towerState.floorAnimation > 0){ const elapsed = (now - towerState.floorAnimStart) / 800; towerState.floorAnimation = Math.max(0, 1 - elapsed); }
+    if(towerState.crashAnimation > 0) towerState.crashAnimation = Math.max(0, towerState.crashAnimation - dt * 1.5);
+    towerState.clouds.forEach(c => { c.x += c.speed * dt * 30; if(c.x > canvasW() + 100) c.x = -100; });
+    towerState.birds.forEach(b => { b.phase += dt * 2; });
+    drawTower(now);
+    towerAnimId = requestAnimationFrame(loop);
+  }
+  towerAnimId = requestAnimationFrame(loop);
+}
+function canvasW(){ const c = document.getElementById('towerCanvas'); return c ? c.width : 800; }
+function drawTower(now){
+  const canvas = document.getElementById('towerCanvas');
+  if(!canvas || !towerState) return;
+  const ctx = canvas.getContext('2d');
+  const W = canvas.width, H = canvas.height;
+  const skyGrad = ctx.createLinearGradient(0, 0, 0, H);
+  skyGrad.addColorStop(0, '#87ceeb'); skyGrad.addColorStop(0.5, '#b0e0e6'); skyGrad.addColorStop(1, '#98d8b0');
+  ctx.fillStyle = skyGrad; ctx.fillRect(0, 0, W, H);
+  ctx.save(); ctx.shadowColor = 'rgba(255,220,100,.9)'; ctx.shadowBlur = 30; ctx.fillStyle = '#fde047';
+  ctx.beginPath(); ctx.arc(W * 0.88, H * 0.1, 30, 0, Math.PI * 2); ctx.fill(); ctx.restore();
+  towerState.clouds.forEach(c => { ctx.save(); ctx.globalAlpha = 0.85; ctx.translate(c.x, c.y); ctx.scale(c.size, c.size); ctx.fillStyle = '#fff'; ctx.beginPath(); ctx.arc(-25, 0, 20, 0, Math.PI * 2); ctx.arc(0, -10, 26, 0, Math.PI * 2); ctx.arc(25, 0, 20, 0, Math.PI * 2); ctx.arc(0, 8, 22, 0, Math.PI * 2); ctx.fill(); ctx.restore(); });
+  towerState.birds.forEach(b => { ctx.save(); ctx.strokeStyle = 'rgba(15,23,42,.7)'; ctx.lineWidth = 1.8; ctx.lineCap = 'round'; const yy = b.y + Math.sin(b.phase) * 6; ctx.beginPath(); ctx.moveTo(b.x - 8, yy); ctx.quadraticCurveTo(b.x - 4, yy - 4, b.x, yy); ctx.quadraticCurveTo(b.x + 4, yy - 4, b.x + 8, yy); ctx.stroke(); ctx.restore(); });
+  const groundY = H - 60;
+  const groundGrad = ctx.createLinearGradient(0, groundY, 0, H);
+  groundGrad.addColorStop(0, '#65a30d'); groundGrad.addColorStop(1, '#365314');
+  ctx.fillStyle = groundGrad; ctx.fillRect(0, groundY, W, H - groundY);
+  const floorHeight = 22, buildingWidth = 90, cx = W / 2;
+  const shakeX = towerState.crashAnimation > 0 ? Math.sin(now * 0.06) * towerState.crashAnimation * 10 : 0;
+  const baseY = groundY;
+  ctx.fillStyle = 'rgba(0,0,0,.2)'; ctx.beginPath(); ctx.ellipse(cx, baseY + 5, buildingWidth * 0.7, 8, 0, 0, Math.PI * 2); ctx.fill();
+  ctx.save(); ctx.translate(shakeX, 0);
+  ctx.fillStyle = '#475569'; ctx.fillRect(cx - buildingWidth / 2 - 6, baseY - 8, buildingWidth + 12, 14);
+  ctx.fillStyle = '#334155'; ctx.fillRect(cx - buildingWidth / 2 - 6, baseY - 8, buildingWidth + 12, 4);
+  const totalFloors = towerState.floors;
+  for(let i = 0; i < totalFloors; i++){
+    const y = baseY - 8 - (i + 1) * floorHeight;
+    const colors = ['#f59e0b', '#ef4444', '#3b82f6', '#10b981', '#8b5cf6', '#ec4899', '#06b6d4', '#84cc16'];
+    ctx.fillStyle = colors[i % colors.length]; ctx.fillRect(cx - buildingWidth / 2, y, buildingWidth, floorHeight - 2);
+    ctx.strokeStyle = 'rgba(0,0,0,.25)'; ctx.lineWidth = 1.5; ctx.strokeRect(cx - buildingWidth / 2, y, buildingWidth, floorHeight - 2);
+    const winY = y + 5, winSize = 12, winSpacing = 18, numWindows = 4;
+    const totalWinW = numWindows * winSize + (numWindows - 1) * (winSpacing - winSize);
+    const startX = cx - totalWinW / 2;
+    for(let w = 0; w < numWindows; w++){
+      const wx = startX + w * winSpacing;
+      ctx.fillStyle = w % 2 === 0 ? 'rgba(255,240,150,.95)' : 'rgba(255,220,120,.7)';
+      ctx.fillRect(wx, winY, winSize, winSize);
+      ctx.strokeStyle = 'rgba(0,0,0,.3)'; ctx.lineWidth = 1; ctx.strokeRect(wx, winY, winSize, winSize);
+    }
+    ctx.fillStyle = 'rgba(255,255,255,.6)'; ctx.font = 'bold 10px sans-serif'; ctx.textAlign = 'left'; ctx.textBaseline = 'middle'; ctx.fillText(`${i + 1}F`, cx - buildingWidth / 2 + 3, y + floorHeight / 2 - 1);
+  }
+  if(totalFloors > 0){
+    const roofY = baseY - 8 - totalFloors * floorHeight;
+    ctx.fillStyle = '#7c3aed'; ctx.beginPath(); ctx.moveTo(cx - buildingWidth / 2 - 5, roofY); ctx.lineTo(cx + buildingWidth / 2 + 5, roofY); ctx.lineTo(cx + buildingWidth / 2, roofY - 18); ctx.lineTo(cx - buildingWidth / 2, roofY - 18); ctx.closePath(); ctx.fill();
+    ctx.strokeStyle = 'rgba(0,0,0,.3)'; ctx.lineWidth = 1.5; ctx.stroke();
+    ctx.strokeStyle = '#334155'; ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(cx, roofY - 18); ctx.lineTo(cx, roofY - 34); ctx.stroke();
+    if(totalFloors >= towerState.maxFloors){ ctx.fillStyle = '#fbbf24'; ctx.beginPath(); ctx.moveTo(cx, roofY - 34); ctx.lineTo(cx + 20, roofY - 30); ctx.lineTo(cx, roofY - 26); ctx.closePath(); ctx.fill(); }
+    else { ctx.fillStyle = '#10b981'; ctx.beginPath(); ctx.arc(cx, roofY - 36, 4, 0, Math.PI * 2); ctx.fill(); }
+  }
+  if(towerState.floorAnimation > 0 && totalFloors > 0){
+    const a = towerState.floorAnimation; const topY = baseY - 8 - totalFloors * floorHeight;
+    ctx.save(); ctx.globalAlpha = a; ctx.shadowColor = '#fbbf24'; ctx.shadowBlur = 30;
+    ctx.fillStyle = '#fbbf24'; ctx.fillRect(cx - buildingWidth / 2 - 3, topY - 3, buildingWidth + 6, 3);
+    for(let i = 0; i < 8; i++){ const angle = (i / 8) * Math.PI * 2 + now * 0.003; const dist = 40 * (1 - a); const sx = cx + Math.cos(angle) * dist; const sy = topY - 10 + Math.sin(angle) * dist; ctx.fillStyle = `rgba(255,237,140,${a})`; ctx.beginPath(); ctx.arc(sx, sy, 4 * a, 0, Math.PI * 2); ctx.fill(); }
+    ctx.restore();
+  }
+  if(towerState.crashAnimation > 0){
+    const a = towerState.crashAnimation; ctx.save(); ctx.globalAlpha = a;
+    for(let i = 0; i < 6; i++){ const angle = (i / 6) * Math.PI * 2; const dist = 30 * (1 - a) + 20; const sx = cx + Math.cos(angle) * dist; const sy = baseY - 20 + Math.sin(angle) * dist; ctx.fillStyle = 'rgba(120,120,120,.6)'; ctx.beginPath(); ctx.arc(sx, sy, 15 * a + 5, 0, Math.PI * 2); ctx.fill(); }
+    ctx.restore();
+  }
+  ctx.restore();
+}
+
+/* PRINT */
+function openPrintModal(){ playSound('click'); stopAllSpeech(); document.getElementById('printModal').classList.remove('hidden'); document.getElementById('printModal').classList.add('flex'); }
+function closePrintModal(){ document.getElementById('printModal').classList.add('hidden'); document.getElementById('printModal').classList.remove('flex'); }
+function selectAllPrint(s){ ['pr-cards','pr-cert','pr-numbers','pr-words','pr-blank','pr-key'].forEach(id => { const el = document.getElementById(id); if(el) el.checked = s; }); }
+function buildPrintHTML(){
+  const inc = id => { const el = document.getElementById(id); return el && el.checked; };
+  const any = ['pr-cards','pr-cert','pr-numbers','pr-words','pr-blank','pr-key'].some(id => inc(id));
+  if(!any){ alert('অন্তত একটি অংশ নির্বাচন করুন।'); return null; }
+  let h = '';
+  if(inc('pr-cards')){
+    h += `<div class="pr-page"><div class="pr-head"><div class="pr-kicker">NCTB • আমার বাংলা বই • প্রথম শ্রেণি • পাঠ ৪১</div><h1>🔢 সংখ্যা কার্ড (১-২০)</h1><div class="pr-meta"><span>শ্রেণি : .....................</span><span>বিষয় : বাংলা</span><span>তারিখ : .....................</span></div></div></div>`;
+    const pages = []; for(let i = 0; i < 20; i += 6) pages.push(NUMBERS.slice(i, i + 6));
+    pages.forEach((page, pi) => {
+      h += `<div class="pr-page${pi > 0 ? ' pr-pagebreak' : ''}" style="page-break-before:${pi > 0 ? 'always' : 'auto'};"><div style="text-align:center;font-size:9pt;color:#64748b;font-weight:700;margin-bottom:2mm;">সংখ্যা কার্ড — পৃষ্ঠা ${toBn(pi+1)} / ${toBn(pages.length)}</div><div class="pr-num-page">`;
+      page.forEach(num => {
+        const isOdd = num.n % 2 === 1;
+        h += `<div class="pr-num-card ${isOdd ? 'odd' : ''}"><div class="pr-corner-num">${toBn(num.n)}</div><div class="pr-decor-circle"></div><div class="pr-big-num">${toBn(num.n)}</div><div class="pr-bn-word">${num.bn}</div><div class="pr-emoji-big">${num.emoji}</div><div class="pr-item-line">${toBn(num.n)}টি ${num.item}</div></div>`;
+      });
+      h += `</div></div>`;
+    });
+  }
+  if(inc('pr-cert')){
+    const name = (childName || '.....................').trim();
+    const today = new Date().toLocaleDateString('bn-BD');
+    h += `<div class="pr-page pr-pagebreak"><div class="pr-cert">
+      <div><div style="font-size:50pt;">🎓</div><div class="cert-head">কৃতিত্ব সার্টিফিকেট</div>
+      <div class="cert-sub">🎨 পরিকল্পনা ও ডিজাইনে: মো: সাইফুল্লাহ সরওয়ার</div>
+      <div class="cert-line"><span class="cert-name">${name}</span></div>
+      <div class="cert-body">সফলভাবে <strong>পাঠ ৪১: সংখ্যা শিখি</strong> সম্পন্ন করেছ!<br>তুমি মোট <strong>${toBn(stars)}</strong> তারা সংগ্রহ করেছো,<br><strong>লেভেল ${toBn(level)}</strong> এ পৌঁছেছো এবং<br><strong>${toBn(unlockedBadges.length)}টি ব্যাজ</strong> অর্জন করেছো।</div>
+      <div class="cert-stars">⭐⭐⭐⭐⭐</div></div>
+      <div><div class="cert-seal">🏅</div><div class="cert-foot"><span>📅 তারিখ: ${today}</span><span>✍️ স্বাক্ষর: __________</span></div>
+      <div style="margin-top:8mm;font-size:9pt;color:#64748b;font-weight:700;">NCTB • আমার বাংলা বই • প্রথম শ্রেণি • ২০২৬</div></div>
+    </div></div>`;
+  }
+  if(inc('pr-numbers')){
+    h += `<div class="pr-page pr-pagebreak"><div class="pr-sec"><h2>🔢 সংখ্যা ১-২০ — তালিকা</h2><table class="pr-table"><thead><tr><th>সংখ্যা</th><th>বাংলা নাম</th><th>ছবি</th><th>বস্তু</th></tr></thead><tbody>`;
+    NUMBERS.forEach(n => { h += `<tr><td style="text-align:center;font-size:16pt;font-family:'Galada',cursive;color:#075985;"><strong>${toBn(n.n)}</strong></td><td style="font-weight:800;font-size:13pt;">${n.bn}</td><td style="text-align:center;font-size:18pt;">${n.emoji}</td><td style="font-size:11pt;">${n.item}</td></tr>`; });
+    h += `</tbody></table></div></div>`;
+  }
+  if(inc('pr-words')){
+    h += `<div class="pr-page pr-pagebreak"><div class="pr-sec"><h2>📚 শব্দ শিখি — সংখ্যা দিয়ে উদাহরণ</h2><table class="pr-table"><thead><tr><th>সংখ্যা</th><th>বাংলা নাম</th><th>উদাহরণ</th><th>বিবরণ</th></tr></thead><tbody>`;
+    WORDS.forEach(w => { h += `<tr><td style="text-align:center;font-size:14pt;font-family:'Galada',cursive;color:#b45309;"><strong>${toBn(w.n)}</strong></td><td style="font-weight:800;">${w.title}</td><td style="font-weight:700;">${w.emoji} ${w.fact}</td><td style="font-size:10pt;">${w.sub}</td></tr>`; });
+    h += `</tbody></table></div></div>`;
+  }
+  if(inc('pr-blank')){
+    h += `<div class="pr-page pr-pagebreak"><div class="pr-sec"><h2>🧩 ফাঁকা ঘরে সঠিক সংখ্যা বসাও</h2>`;
+    const tpl = generateBlankTables();
+    tpl.forEach(t => {
+      h += `<div style="margin-bottom:12px;"><table class="pr-table" style="width:100%;"><tr>`;
+      t.row1.forEach(cell => { if(cell === '?') h += `<td style="background:#fef3c7;height:36px;text-align:center;font-size:14pt;border:2px solid #0284c7;">&nbsp;</td>`; else h += `<td style="height:36px;text-align:center;font-size:14pt;font-weight:800;border:2px solid #0284c7;">${cell}</td>`; });
+      h += `</tr></table></div>`;
+    });
+    h += `</div></div>`;
+  }
+  if(inc('pr-key')){
+    h += `<div class="pr-page pr-pagebreak"><div class="pr-sec"><h2>🗝️ উত্তরপত্র</h2>
+      <h3 style="color:#075985;margin-top:8px;">🔢 সংখ্যা তালিকা:</h3>
+      <p style="color:#047857;font-weight:700;">${NUMBERS.map(n => `${toBn(n.n)}=${n.bn}`).join(' | ')}</p>
+      <h3 style="color:#075985;margin-top:8px;">📚 শব্দ শিখি:</h3>
+      <p style="color:#047857;font-weight:700;">${WORDS.map(w => `${toBn(w.n)}=${w.fact}`).join(' | ')}</p>
+    </div></div>`;
+  }
+  h += `<div class="pr-foot" style="margin-top:14px;">📚 আমার বাংলা বই • প্রথম শ্রেণি • পাঠ ৪১ : সংখ্যা শিখি | 🎨 মো: সাইফুল্লাহ সরওয়ার ⭐</div>`;
+  return h;
+}
+function generatePrint(){
+  const c = buildPrintHTML();
+  if(!c) return;
+  playSound('click'); closePrintModal(); stopAllSpeech();
+  document.getElementById('printArea').innerHTML = c;
+  setTimeout(() => window.print(), 400);
+}
+
+/* DOWNLOAD / PWA / PPT */
+function downloadHTML(){
+  playSound('click'); stopAllSpeech();
+  try{
+    document.getElementById('printArea').innerHTML = '';
+    const pm = document.getElementById('printModal'); if(pm){ pm.classList.add('hidden'); pm.classList.remove('flex'); }
+    const im = document.getElementById('installModal'); if(im){ im.classList.add('hidden'); im.classList.remove('flex'); }
+    closeDrawer();
+    const fullHTML = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
+    const blob = new Blob([fullHTML], { type: 'text/html;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url; a.download = 'পাঠ-৪১-সংখ্যা-শিখি.html';
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    setTimeout(() => URL.revokeObjectURL(url), 500);
+    showToast('✅ ডাউনলোড সম্পন্ন!');
+  } catch(e){ console.error(e); alert('ডাউনলোড করা যায়নি।'); }
+}
+function showToast(msg){
+  const t = document.createElement('div');
+  t.style.cssText = `position:fixed;bottom:100px;left:50%;transform:translateX(-50%) translateY(80px);background:linear-gradient(135deg,#0284c7,#0ea5e9);color:#fff;padding:12px 22px;border-radius:14px;font-family:'Hind Siliguri',sans-serif;font-weight:700;font-size:14px;box-shadow:0 10px 30px rgba(0,0,0,.25);z-index:9999;opacity:0;transition:all .35s ease;pointer-events:none;max-width:90vw;text-align:center;`;
+  t.textContent = msg;
+  document.body.appendChild(t);
+  requestAnimationFrame(() => { t.style.opacity = '1'; t.style.transform = 'translateX(-50%) translateY(0)'; });
+  setTimeout(() => { t.style.opacity = '0'; t.style.transform = 'translateX(-50%) translateY(80px)'; setTimeout(() => t.remove(), 400); }, 3200);
+}
+
+let deferredInstallPrompt = null, isInstalled = false;
+if(window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true) isInstalled = true;
+function isFileProtocol(){ return location.protocol === 'file:'; }
+function isSecureContextSafe(){ return location.protocol === 'https:' || location.hostname === 'localhost' || location.hostname === '127.0.0.1'; }
+function createManifest(){
+  try{
+    const iconSvg = (size) => `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${size} ${size}"><rect width="${size}" height="${size}" fill="#0284c7" rx="${size*0.18}"/><text y="${size*0.72}" x="${size/2}" text-anchor="middle" font-size="${size*0.6}">🔢</text></svg>`;
+    const dataURI = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(iconSvg(192));
+    const manifest = { name: "সংখ্যা শিখি — পাঠ ৪১", short_name: "সংখ্যা শিখি", description: "১ম শ্রেণির বাংলা পাঠ ৪১", start_url: ".", scope: ".", display: "standalone", background_color: "#dbeafe", theme_color: "#0284c7", lang: "bn", dir: "ltr", icons: [{ src: dataURI, sizes: "192x192", type: "image/svg+xml", purpose: "any" }] };
+    const mURI = 'data:application/manifest+json;charset=utf-8,' + encodeURIComponent(JSON.stringify(manifest));
+    let link = document.querySelector('link[rel="manifest"]');
+    if(!link){ link = document.createElement('link'); link.rel = 'manifest'; document.head.appendChild(link); }
+    link.href = mURI;
+  } catch(e){}
+}
+async function registerServiceWorker(){
+  if(!('serviceWorker' in navigator) || !isSecureContextSafe()) return;
+  const swCode = `self.addEventListener('install',e=>self.skipWaiting());self.addEventListener('activate',e=>e.waitUntil(self.clients.claim()));self.addEventListener('fetch',e=>e.respondWith(fetch(e.request).catch(()=>caches.match(e.request))));`;
+  try{ const blob = new Blob([swCode], { type:'application/javascript' }); const url = URL.createObjectURL(blob); await navigator.serviceWorker.register(url, { scope: './' }); } catch(e){}
+}
+window.addEventListener('beforeinstallprompt', e => { e.preventDefault(); deferredInstallPrompt = e; });
+window.addEventListener('appinstalled', () => { isInstalled = true; deferredInstallPrompt = null; const btn = document.getElementById('installBtn'); const txt = document.getElementById('installBtnText'); if(btn){ btn.classList.remove('install-pulse'); btn.className = 'drawer-btn btn-teal'; } if(txt) txt.innerText = '✅ ইনস্টল করা আছে'; });
+function handleInstallClick(){ playSound('click'); if(isInstalled){ showToast('✅ ইনস্টল করা আছে!'); return; } if(deferredInstallPrompt){ closeDrawer(); openInstallModal('native'); return; } if(isFileProtocol()){ closeDrawer(); openInstallModal('file'); return; } closeDrawer(); openInstallModal('manual'); }
+function triggerNativeInstall(){ if(!deferredInstallPrompt){ showToast('⚠️ পাওয়া যাচ্ছে না।'); return; } deferredInstallPrompt.prompt(); deferredInstallPrompt.userChoice.then(c => { deferredInstallPrompt = null; closeInstallModal(); }); }
+function buildInstallSteps(mode){
+  const steps = [];
+  if(mode === 'file'){ steps.push({icon:'⚠️', title:'লোকাল ফাইলে ইনস্টল হয় না', body:'আপনি <strong>file://</strong> থেকে খুলেছেন।'}); steps.push({icon:'⚡', title:'সমাধান : Netlify Drop', body:'<strong>app.netlify.com/drop</strong> খুলুন → HTML ফাইল ড্র্যাগ করুন → HTTPS লিংক Chrome-এ খুলুন।'}); return steps; }
+  if(mode === 'native'){ steps.push({icon:'✨', title:'ব্রাউজার ইনস্টল সাপোর্ট করছে', body:'সবুজ বাক্সে ক্লিক করুন।'}); return steps; }
+  steps.push({icon:'💻', title:'ব্রাউজার মেনু', body:'⋮ → Install app অথবা ⊕ Install আইকন।'});
+  steps.push({icon:'✅', title:'সফল হলে', body:'হোম স্ক্রিনে সংখ্যা শিখি আইকন।'});
+  return steps;
+}
+function openInstallModal(mode){
+  const nb = document.getElementById('installNativeBox');
+  const header = document.getElementById('installHeaderMsg');
+  const stepsBox = document.getElementById('installSteps');
+  if(mode === 'native' && deferredInstallPrompt){ nb.classList.remove('hidden'); header.innerText = '💡 অথবা নিচের ধাপ দেখুন:'; }
+  else { nb.classList.add('hidden'); header.innerText = mode === 'file' ? '⚠️ file:// থেকে চলছে।' : '💡 ব্রাউজার অনুযায়ী ধাপ:'; }
+  stepsBox.innerHTML = buildInstallSteps(mode).map(s => `<div class="flex gap-3 bg-slate-50 border-2 border-slate-200 rounded-2xl p-3"><div class="text-2xl">${s.icon}</div><div><p class="font-black text-sm">${s.title}</p><p class="text-xs text-slate-600">${s.body}</p></div></div>`).join('');
+  document.getElementById('installModal').classList.remove('hidden'); document.getElementById('installModal').classList.add('flex');
+}
+function closeInstallModal(){ document.getElementById('installModal').classList.add('hidden'); document.getElementById('installModal').classList.remove('flex'); }
+createManifest(); registerServiceWorker();
+
+function downloadPPT(){
+  if(typeof PptxGenJS === 'undefined'){ alert('লাইব্রেরি লোড হয়নি।'); return; }
+  const b = document.getElementById('pptBtnText');
+  const old = b.innerText; b.innerText = '⏳...';
+  playSound('click'); stopAllSpeech();
+  setTimeout(() => {
+    try{ buildPPTX(); } catch(e){ console.error(e); alert('PPT ব্যর্থ।'); }
+    finally{ b.innerText = old; }
+  }, 100);
+}
+function buildPPTX(){
+  const pptx = new PptxGenJS();
+  pptx.layout = 'LAYOUT_16x9';
+  const FONT = 'Nirmala UI';
+  const SKY = '0284c7', AMBER = 'f59e0b', WHITE = 'FFFFFF', DARK = '075985', TEXT = '0F172A';
+  function hdr(s, t){
+    s.addShape('rect', { x: 0, y: 0, w: 10, h: .85, fill: { color: SKY } });
+    s.addShape('rect', { x: 0, y: .85, w: 10, h: .06, fill: { color: AMBER } });
+    s.addText(t, { x: .45, y: 0, w: 9.1, h: .85, fontSize: 22, bold: true, color: WHITE, fontFace: FONT, valign: 'middle', align: 'left' });
+  }
+  let s = pptx.addSlide();
+  s.background = { color: SKY };
+  s.addShape('rect', { x: 0, y: 0, w: 10, h: .28, fill: { color: AMBER } });
+  s.addShape('rect', { x: 0, y: 5.34, w: 10, h: .29, fill: { color: AMBER } });
+  s.addText('🔢 ✏️ 📚 🍎 🌸', { x: 0, y: .35, w: 10, h: .5, fontSize: 20, align: 'center' });
+  s.addText('📚 আমার বাংলা বই — প্রথম শ্রেণি', { x: 0, y: 2.3, w: 10, h: .5, fontSize: 18, bold: true, color: 'BAE6FD', align: 'center', fontFace: FONT });
+  s.addText('পাঠ ৪১ : সংখ্যা শিখি 🔢', { x: 0, y: 2.9, w: 10, h: .9, fontSize: 32, bold: true, color: 'FDE68A', align: 'center', fontFace: FONT });
+  s.addText('🎨 মো: সাইফুল্লাহ সরওয়ার ⭐', { x: 0, y: 4.45, w: 10, h: .5, fontSize: 14, bold: true, color: 'FDE68A', align: 'center', fontFace: FONT });
+  s = pptx.addSlide(); s.background = { color: 'F8FAFC' };
+  hdr(s, '🔢 সংখ্যা ১-১০');
+  let rows1 = [];
+  for(let i = 0; i < 10; i += 5){
+    const r1 = []; const r2 = [];
+    for(let j = 0; j < 5; j++){
+      const num = NUMBERS[i + j];
+      if(num){ r1.push({ text: `${toBn(num.n)}`, options: { bold: true, fontSize: 28, color: DARK, align: 'center', fill: { color: 'E0F2FE' } } }); r2.push({ text: num.bn, options: { fontSize: 14, bold: true, color: TEXT, align: 'center' } }); }
+    }
+    rows1.push(r1); rows1.push(r2);
+  }
+  s.addTable(rows1, { x: .5, y: 1.2, w: 9, colW: [1.8, 1.8, 1.8, 1.8, 1.8], fontFace: FONT, border: { pt: 1, color: 'BAE6FD' }, rowH: .6 });
+  s = pptx.addSlide(); s.background = { color: 'F8FAFC' };
+  hdr(s, '🔢 সংখ্যা ১১-২০');
+  let rows2 = [];
+  for(let i = 10; i < 20; i += 5){
+    const r1 = []; const r2 = [];
+    for(let j = 0; j < 5; j++){
+      const num = NUMBERS[i + j];
+      if(num){ r1.push({ text: `${toBn(num.n)}`, options: { bold: true, fontSize: 28, color: DARK, align: 'center', fill: { color: 'E0F2FE' } } }); r2.push({ text: num.bn, options: { fontSize: 14, bold: true, color: TEXT, align: 'center' } }); }
+    }
+    rows2.push(r1); rows2.push(r2);
+  }
+  s.addTable(rows2, { x: .5, y: 1.2, w: 9, colW: [1.8, 1.8, 1.8, 1.8, 1.8], fontFace: FONT, border: { pt: 1, color: 'BAE6FD' }, rowH: .6 });
+  s = pptx.addSlide(); s.background = { color: 'F8FAFC' };
+  hdr(s, '📚 শব্দ শিখি');
+  const wrows = [['সংখ্যা', 'নাম', 'উদাহরণ'].map(t => ({ text: t, options: { bold: true, color: WHITE, fill: { color: SKY }, align: 'center' } }))];
+  WORDS.forEach(w => wrows.push([
+    { text: toBn(w.n), options: { bold: true, color: DARK, fontSize: 14, align: 'center' } },
+    { text: w.title, options: { bold: true, color: TEXT, fontSize: 13, align: 'center' } },
+    { text: `${w.emoji} ${w.fact}`, options: { color: TEXT, fontSize: 11, align: 'center' } }
+  ]));
+  s.addTable(wrows, { x: 1, y: 1.1, w: 8, colW: [1.5, 2, 4.5], fontFace: FONT, fontSize: 11, border: { pt: 1, color: 'BAE6FD' }, rowH: .42 });
+  s = pptx.addSlide(); s.background = { color: '0a0e27' };
+  s.addShape('rect', { x: 0, y: 0, w: 10, h: .85, fill: { color: '4338ca' } });
+  s.addText('🌙 রাতের আকাশ কুইজ', { x: .45, y: 0, w: 9.1, h: .85, fontSize: 22, bold: true, color: WHITE, fontFace: FONT, valign: 'middle' });
+  s.addText('✨ সঠিক উত্তরে সংখ্যা জ্বলে ওঠে!', { x: .7, y: 2, w: 8.6, h: 3, fontSize: 20, color: 'E0E7FF', fontFace: FONT, align: 'center' });
+  s = pptx.addSlide(); s.background = { color: 'FFE4E6' };
+  s.addShape('rect', { x: 0, y: 0, w: 10, h: .85, fill: { color: 'e11d48' } });
+  s.addText('🏢 ভবন তৈরি — ২০ তলা পর্যন্ত', { x: .45, y: 0, w: 9.1, h: .85, fontSize: 22, bold: true, color: WHITE, fontFace: FONT, valign: 'middle' });
+  s.addText('সঠিক উত্তরে ভবন উঁচু!\nভুল হলে তলা ভেঙে যায়!', { x: .7, y: 2, w: 8.6, h: 3, fontSize: 18, color: '0F172A', fontFace: FONT, align: 'center' });
+  s = pptx.addSlide(); s.background = { color: SKY };
+  s.addShape('rect', { x: 0, y: 0, w: 10, h: .28, fill: { color: AMBER } });
+  s.addShape('rect', { x: 0, y: 5.34, w: 10, h: .29, fill: { color: AMBER } });
+  s.addText('ধন্যবাদ 🔢', { x: 0, y: 1.7, w: 10, h: .9, fontSize: 38, bold: true, color: 'FDE68A', align: 'center', fontFace: FONT });
+  s.addText('🎨 মো: সাইফুল্লাহ সরওয়ার ⭐', { x: 0, y: 4.2, w: 10, h: .5, fontSize: 15, bold: true, color: 'FDE68A', align: 'center', fontFace: FONT });
+  pptx.writeFile({ fileName: 'পাঠ-৪১-সংখ্যা-শিখি.pptx' }).catch(err => { console.error(err); alert('সেভ ব্যর্থ।'); });
+}
+
+/* INIT */
+window.addEventListener('load', () => {
+  renderNumbers();
+  renderWords();
+  blankTables = generateBlankTables();
+  renderBlank();
+  renderBadges();
+  initMascot();
+  updateHeaderGreeting();
+  updateDrawerSound();
+  updateStarBar();
+  updateStreak();
+  checkBadges();
+  const inp = document.getElementById('childNameInput');
+  if(inp) inp.value = childName;
+  if('speechSynthesis' in window){ window.speechSynthesis.onvoiceschanged = () => { window.speechSynthesis.getVoices(); }; }
+  if(isInstalled){ const btn = document.getElementById('installBtn'); const txt = document.getElementById('installBtnText'); if(btn){ btn.classList.remove('install-pulse'); btn.className = 'drawer-btn btn-teal'; } if(txt) txt.innerText = '✅ ইনস্টল করা আছে'; }
+  switchTab('lesson');
+  setTimeout(() => {
+    showMascotMsg('আসসালামু আলাইকুম! চলো শিখি! 📚', 4000);
+  }, 1000);
+});
+</script>
+</body>
+</html>
