@@ -20,7 +20,6 @@ body{font-family:'Hind Siliguri',sans-serif;background:linear-gradient(135deg,#d
 ::-webkit-scrollbar-track{background:#dbeafe}
 ::-webkit-scrollbar-thumb{background:#0284c7;border-radius:10px}
 
-/* Star bar */
 #starBar{position:fixed;top:14px;left:14px;z-index:80;display:flex;gap:8px;align-items:center;background:linear-gradient(135deg,#fbbf24,#f59e0b);color:#78350f;padding:8px 14px;border-radius:16px;font-weight:900;font-size:14px;box-shadow:0 8px 22px rgba(245,158,11,.5),0 0 0 3px rgba(255,255,255,.4);border:none;}
 #starBar .starIcon{font-size:20px;}
 #starBar .lvlBadge{background:#78350f;color:#fbbf24;padding:2px 8px;border-radius:10px;font-size:11px;}
@@ -57,9 +56,32 @@ body{font-family:'Hind Siliguri',sans-serif;background:linear-gradient(135deg,#d
 .memory-card .mc-back{background:linear-gradient(135deg,#fef3c7,#fde68a);color:#78350f;border-color:#f59e0b;transform:rotateY(180deg);font-family:'Galada',cursive;}
 .memory-card.matched .mc-back{background:linear-gradient(135deg,#10b981,#059669);color:#fff;border-color:#065f46;animation:praise-b .5s;}
 
-/* ═══ TRACE FIXED ═══ */
-#traceCanvasWrap{position:relative;width:100%;max-width:420px;margin:0 auto;aspect-ratio:1/1;background:#fff;border-radius:24px;border:4px solid #0284c7;box-shadow:0 12px 30px rgba(2,132,199,.25);overflow:hidden;}
-#traceCanvas{display:block;width:100%;height:100%;touch-action:none;cursor:crosshair;}
+/* ═══ TRACE — CENTERED & AUTO-FIT ═══ */
+#traceCanvasWrap{
+  position:relative;
+  width:100%;
+  max-width:440px;
+  margin:0 auto;
+  aspect-ratio:1 / 1;
+  background:#fff;
+  border-radius:24px;
+  border:4px solid #0284c7;
+  box-shadow:0 12px 30px rgba(2,132,199,.25);
+  overflow:hidden;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+#traceCanvas{
+  display:block;
+  width:100% !important;
+  height:100% !important;
+  touch-action:none;
+  cursor:crosshair;
+}
+
+.trace-color-btn{transition:all .2s;}
+.trace-color-btn.ring-4{box-shadow:0 0 0 4px #a855f7, 0 6px 18px rgba(0,0,0,.25);}
 
 .opt-btn{padding:10px 18px;border-radius:14px;font-weight:900;font-size:18px;border:3px solid;cursor:pointer;transition:all .2s;min-width:60px;text-align:center;}
 .opt-btn:hover{transform:translateY(-3px) scale(1.05);}
@@ -159,7 +181,6 @@ body{font-family:'Hind Siliguri',sans-serif;background:linear-gradient(135deg,#d
   .pr-table td{border:1px solid #bae6fd;padding:4px 6px;font-weight:600}
   .pr-foot{margin-top:14px;border-top:2px solid #cbd5e1;padding-top:5px;text-align:center;font-size:8pt;color:#64748b;font-weight:600}
   .pr-pagebreak{page-break-before:always}
-  .pr-blank{display:inline-block;min-width:60px;border-bottom:1.5px solid #0f172a;height:14px;margin:0 6px;}
   .pr-num-page{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:repeat(3,1fr);gap:8mm;height:277mm;padding:5mm;box-sizing:border-box;}
   .pr-num-card{border:2.5px solid #0284c7;border-radius:14px;padding:6mm;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;background:linear-gradient(135deg,#f0f9ff,#e0f2fe);overflow:hidden;page-break-inside:avoid;}
   .pr-num-card.odd{background:linear-gradient(135deg,#fef3c7,#fed7aa);border-color:#f59e0b;}
@@ -186,11 +207,7 @@ body{font-family:'Hind Siliguri',sans-serif;background:linear-gradient(135deg,#d
 </head>
 <body class="p-2 sm:p-4 md:p-6 text-gray-800">
 
-<div id="starBar" title="তোমার তারা">
-  <span class="starIcon">⭐</span>
-  <span id="starCount">০</span>
-  <span class="lvlBadge">লেভেল <span id="lvlNum">১</span></span>
-</div>
+<div id="starBar" title="তোমার তারা"><span class="starIcon">⭐</span><span id="starCount">০</span><span class="lvlBadge">লেভেল <span id="lvlNum">১</span></span></div>
 
 <button id="settingsFab" onclick="toggleDrawer()"><i class="fas fa-sliders" id="fabIcon"></i><span class="fab-badge">⚙️</span></button>
 <div id="drawerBackdrop" onclick="closeDrawer()"></div>
@@ -219,9 +236,7 @@ body{font-family:'Hind Siliguri',sans-serif;background:linear-gradient(135deg,#d
       <div style="margin-top:7px;">
         <label style="font-size:11px;font-weight:800;color:#0369a1;display:block;margin-bottom:5px;">🎚️ পড়ার গতি</label>
         <select id="speechRateSelect" onchange="changeSpeechRate(this.value)" class="drawer-select">
-          <option value="0.6">🐢 ধীরে</option>
-          <option value="0.8" selected>🚶 স্বাভাবিক</option>
-          <option value="1.0">🏃 দ্রুত</option>
+          <option value="0.6">🐢 ধীরে</option><option value="0.8" selected>🚶 স্বাভাবিক</option><option value="1.0">🏃 দ্রুত</option>
         </select>
       </div>
     </div>
@@ -267,9 +282,7 @@ body{font-family:'Hind Siliguri',sans-serif;background:linear-gradient(135deg,#d
       </div>
       <h1 class="text-3xl sm:text-5xl font-title text-amber-200 tracking-wide drop-shadow-md mt-0.5">সংখ্যা শিখি</h1>
       <div id="headerGreeting" class="mt-2 inline-flex items-center gap-2 bg-gradient-to-r from-amber-400 via-pink-500 to-rose-500 text-white text-xs sm:text-sm font-black px-4 py-1 rounded-full shadow-lg border border-white/40">
-        <span>✨</span>
-        <span>পরিকল্পনা ও ডিজাইনে: <strong class="text-yellow-200 text-sm sm:text-base font-extrabold">মো: সাইফুল্লাহ সরওয়ার</strong></span>
-        <span>👑</span>
+        <span>✨</span><span>পরিকল্পনা ও ডিজাইনে: <strong class="text-yellow-200 text-sm sm:text-base font-extrabold">মো: সাইফুল্লাহ সরওয়ার</strong></span><span>👑</span>
       </div>
     </div>
   </div>
@@ -334,7 +347,7 @@ body{font-family:'Hind Siliguri',sans-serif;background:linear-gradient(135deg,#d
   <div id="wordsGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4"></div>
 </section>
 
-<!-- TRACE — FIXED -->
+<!-- TRACE — FIXED CENTERED -->
 <section id="section-trace" class="section-view space-y-4">
   <div class="bg-gradient-to-r from-violet-500 to-purple-600 rounded-3xl p-5 text-white shadow-xl border-4 border-purple-300 flex items-center justify-between flex-wrap gap-3">
     <div>
@@ -359,12 +372,12 @@ body{font-family:'Hind Siliguri',sans-serif;background:linear-gradient(135deg,#d
       <canvas id="traceCanvas"></canvas>
     </div>
     <div class="mt-3 flex justify-center gap-2 flex-wrap">
-      <button onclick="traceStrokeColor('#ef4444')" data-c="#ef4444" class="trace-color-btn w-11 h-11 rounded-full border-4 border-white shadow-md transition hover:scale-110" style="background:#ef4444"></button>
-      <button onclick="traceStrokeColor('#3b82f6')" data-c="#3b82f6" class="trace-color-btn w-11 h-11 rounded-full border-4 border-white shadow-md transition hover:scale-110" style="background:#3b82f6"></button>
-      <button onclick="traceStrokeColor('#10b981')" data-c="#10b981" class="trace-color-btn w-11 h-11 rounded-full border-4 border-white shadow-md transition hover:scale-110" style="background:#10b981"></button>
-      <button onclick="traceStrokeColor('#f59e0b')" data-c="#f59e0b" class="trace-color-btn w-11 h-11 rounded-full border-4 border-white shadow-md transition hover:scale-110" style="background:#f59e0b"></button>
-      <button onclick="traceStrokeColor('#8b5cf6')" data-c="#8b5cf6" class="trace-color-btn w-11 h-11 rounded-full border-4 border-white shadow-md transition hover:scale-110" style="background:#8b5cf6"></button>
-      <button onclick="traceStrokeColor('#ec4899')" data-c="#ec4899" class="trace-color-btn w-11 h-11 rounded-full border-4 border-white shadow-md transition hover:scale-110" style="background:#ec4899"></button>
+      <button onclick="traceStrokeColor('#ef4444')" data-c="#ef4444" class="trace-color-btn w-11 h-11 rounded-full border-4 border-white shadow-md" style="background:#ef4444"></button>
+      <button onclick="traceStrokeColor('#3b82f6')" data-c="#3b82f6" class="trace-color-btn w-11 h-11 rounded-full border-4 border-white shadow-md" style="background:#3b82f6"></button>
+      <button onclick="traceStrokeColor('#10b981')" data-c="#10b981" class="trace-color-btn w-11 h-11 rounded-full border-4 border-white shadow-md" style="background:#10b981"></button>
+      <button onclick="traceStrokeColor('#f59e0b')" data-c="#f59e0b" class="trace-color-btn w-11 h-11 rounded-full border-4 border-white shadow-md" style="background:#f59e0b"></button>
+      <button onclick="traceStrokeColor('#8b5cf6')" data-c="#8b5cf6" class="trace-color-btn w-11 h-11 rounded-full border-4 border-white shadow-md" style="background:#8b5cf6"></button>
+      <button onclick="traceStrokeColor('#ec4899')" data-c="#ec4899" class="trace-color-btn w-11 h-11 rounded-full border-4 border-white shadow-md" style="background:#ec4899"></button>
     </div>
     <p class="text-center text-xs font-black text-purple-800 mt-3">🎨 রং বেছে নাও এবং সংখ্যার ভেতরে আঙুল চালাও!</p>
   </div>
@@ -838,7 +851,7 @@ function switchTab(name){
   if(name === 'tower') setTimeout(initTowerGame, 150);
   else stopTowerGame();
   if(name === 'count') setTimeout(newCountQuestion, 100);
-  if(name === 'trace') setTimeout(initTrace, 100);
+  if(name === 'trace') setTimeout(() => { initTrace(); }, 250);
   if(name === 'memory') setTimeout(startMemoryGame, 100);
   if(name === 'badges') renderBadges();
   const main = document.getElementById('mainContent');
@@ -985,6 +998,7 @@ let countState = null, towerState = null, towerAnimId = null;
 let memoryState = null;
 let traceState = null;
 let traceRenderPending = false;
+let traceResizeTimer = null;
 
 try { childName = localStorage.getItem('n41ChildName') || ''; } catch(e){}
 function getNamePrefix(){ return childName && childName.trim() ? childName.trim() + ', ' : ''; }
@@ -1097,33 +1111,82 @@ function speakWord(i){
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   TRACE — FIXED: strokes stay INSIDE the number
+   TRACE — PERFECTLY CENTERED & AUTO-FIT
    ═══════════════════════════════════════════════════════════════ */
-function traceFontStack(){
-  return `900 FONTSIZEpx 'Galada', 'Hind Siliguri', serif`;
-}
-function fitTraceFontSize(ctx, text, maxW, maxH){
-  // Find the largest font size that fits both width and height
-  let size = Math.min(maxW, maxH);
-  for(let i = 0; i < 30; i++){
-    ctx.font = `900 ${size}px 'Galada', 'Hind Siliguri', serif`;
+
+/**
+ * Measure the largest font that fits text within a box, and compute
+ * the exact top-left anchor (x,y) to place it PERFECTLY centered using
+ * textBaseline='alphabetic' and actual bounding box metrics.
+ *
+ * @returns { fontSize, x, y, ascent, descent, width }
+ */
+function layoutCenteredText(ctx, text, boxW, boxH, fillRatio){
+  const ratio = fillRatio || 0.82;
+  const maxW = boxW * ratio;
+  const maxH = boxH * ratio;
+
+  const fontStr = (sz) => `900 ${sz}px 'Galada', 'Hind Siliguri', serif`;
+
+  // Binary search largest font size fitting BOTH width & height
+  let lo = 20, hi = Math.min(boxW, boxH) * 1.5;
+  let bestSize = lo;
+  let bestW = 0, bestAsc = 0, bestDesc = 0;
+  for(let iter = 0; iter < 40; iter++){
+    const size = (lo + hi) / 2;
+    ctx.font = fontStr(size);
     const m = ctx.measureText(text);
     const w = m.width;
-    const h = m.actualBoundingBoxAscent + m.actualBoundingBoxDescent || size;
-    if(w <= maxW * 0.92 && h <= maxH * 0.92) break;
-    size -= Math.max(2, size * 0.05);
-    if(size < 20) { size = 20; break; }
+    let asc = m.actualBoundingBoxAscent;
+    let desc = m.actualBoundingBoxDescent;
+    // Fallback if bounding-box metrics not supported
+    if(typeof asc !== 'number' || isNaN(asc) || asc <= 0){
+      asc = size * 0.78;
+      desc = size * 0.22;
+    }
+    const h = asc + desc;
+    if(w <= maxW && h <= maxH){
+      bestSize = size;
+      bestW = w; bestAsc = asc; bestDesc = desc;
+      lo = size;
+    } else {
+      hi = size;
+    }
+    if(hi - lo < 0.5) break;
   }
-  return size;
+
+  // Final measurement at bestSize (in case loop ended without capture)
+  ctx.font = fontStr(bestSize);
+  const fm = ctx.measureText(text);
+  bestW = fm.width;
+  bestAsc = (typeof fm.actualBoundingBoxAscent === 'number' && !isNaN(fm.actualBoundingBoxAscent) && fm.actualBoundingBoxAscent > 0)
+            ? fm.actualBoundingBoxAscent : bestSize * 0.78;
+  bestDesc = (typeof fm.actualBoundingBoxDescent === 'number' && !isNaN(fm.actualBoundingBoxDescent))
+            ? fm.actualBoundingBoxDescent : bestSize * 0.22;
+
+  // PERFECT CENTERING
+  // With textAlign='left' + textBaseline='alphabetic':
+  //   visual left edge = x
+  //   visual right edge = x + bestW
+  //   visual top edge   = y - bestAsc
+  //   visual bottom edge= y + bestDesc
+  // So:
+  //   x = (boxW - bestW) / 2
+  //   y = (boxH + bestAsc - bestDesc) / 2
+  const x = (boxW - bestW) / 2;
+  const y = (boxH + bestAsc - bestDesc) / 2;
+
+  return { fontSize: bestSize, x, y, ascent: bestAsc, descent: bestDesc, width: bestW };
 }
+
 function initTrace(){
   const canvas = document.getElementById('traceCanvas');
   if(!canvas) return;
   const wrap = document.getElementById('traceCanvasWrap');
   const rect = wrap.getBoundingClientRect();
   const dpr = window.devicePixelRatio || 1;
-  const displayW = Math.max(200, rect.width);
-  const displayH = Math.max(200, rect.height);
+  const displayW = Math.max(200, rect.width || 320);
+  const displayH = Math.max(200, rect.height || displayW);
 
   canvas.width = Math.floor(displayW * dpr);
   canvas.height = Math.floor(displayH * dpr);
@@ -1132,7 +1195,7 @@ function initTrace(){
 
   const ctx = canvas.getContext('2d');
 
-  // Stroke canvas (offscreen)
+  // Offscreen stroke canvas — raw user strokes
   const strokeCanvas = document.createElement('canvas');
   strokeCanvas.width = canvas.width;
   strokeCanvas.height = canvas.height;
@@ -1146,31 +1209,37 @@ function initTrace(){
   tmpCanvas.width = canvas.width;
   tmpCanvas.height = canvas.height;
   const tmpCtx = tmpCanvas.getContext('2d');
-  tmpCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+  // Preserve current number & color if re-initializing
+  const prevN = (traceState && traceState.currentN) || 1;
+  const prevColor = (traceState && traceState.strokeColor) || '#ef4444';
 
   traceState = {
-    currentN: traceState ? traceState.currentN : 1,
+    currentN: prevN,
     drawing: false,
-    strokeColor: (traceState && traceState.strokeColor) || '#ef4444',
+    strokeColor: prevColor,
     lineWidth: 18,
     canvas, ctx, dpr,
     displayW, displayH,
     strokeCanvas, strokeCtx,
     tmpCanvas, tmpCtx,
-    lastX: 0, lastY: 0
+    lastX: 0, lastY: 0,
+    _layout: null
   };
 
-  // Fetch font ready
+  // Update labels & draw initial
+  updateTraceLabel();
+  clearTrace();
+  updateColorButtons();
+
+  // Redraw once fonts are ready
   if(document.fonts && document.fonts.ready){
     document.fonts.ready.then(() => {
-      updateTraceLabel();
       renderTraceCanvas();
     }).catch(()=>{});
   }
 
-  updateTraceLabel();
-  renderTraceCanvas();
-
+  // Pointer events
   canvas.onpointerdown = startStroke;
   canvas.onpointermove = moveStroke;
   canvas.onpointerup = endStroke;
@@ -1185,6 +1254,13 @@ function updateTraceLabel(){
   const num = NUMBERS[traceState.currentN - 1];
   const nl = document.getElementById('traceNumLabel'); if(nl) nl.innerText = toBn(num.n);
   const wl = document.getElementById('traceWordLabel'); if(wl) wl.innerText = `(${num.bn})`;
+}
+
+function updateColorButtons(){
+  if(!traceState) return;
+  document.querySelectorAll('.trace-color-btn').forEach(b => b.classList.remove('ring-4'));
+  const btn = document.querySelector(`.trace-color-btn[data-c="${traceState.strokeColor}"]`);
+  if(btn) btn.classList.add('ring-4');
 }
 
 function scheduleTraceRender(){
@@ -1203,7 +1279,6 @@ function startStroke(e){
   traceState.drawing = true;
   traceState.lastX = e.clientX - rect.left;
   traceState.lastY = e.clientY - rect.top;
-  // Dot for initial touch
   const sCtx = traceState.strokeCtx;
   sCtx.fillStyle = traceState.strokeColor;
   sCtx.beginPath();
@@ -1233,7 +1308,7 @@ function moveStroke(e){
   scheduleTraceRender();
 }
 
-function endStroke(e){
+function endStroke(){
   if(!traceState) return;
   traceState.drawing = false;
 }
@@ -1244,54 +1319,64 @@ function renderTraceCanvas(){
   const { canvas, ctx, strokeCanvas, tmpCanvas, tmpCtx, dpr, displayW, displayH } = s;
   const W = canvas.width, H = canvas.height;
   const numText = toBn(s.currentN);
-  const cx = displayW / 2;
-  const cy = displayH / 2;
 
-  // Determine font size
-  const fontSize = fitTraceFontSize(ctx, numText, displayW, displayH);
-  s._fontSize = fontSize;
+  // Compute centered layout ONCE, cache it
+  ctx.setTransform(1, 0, 0, 1, 0, 0);
+  ctx.font = `900 100px 'Galada', 'Hind Siliguri', serif`; // warm up
+  const layout = layoutCenteredText(ctx, numText, displayW, displayH, 0.82);
+  s._layout = layout;
 
   // 1) Clear visible canvas
-  ctx.save();
   ctx.setTransform(1, 0, 0, 1, 0, 0);
   ctx.clearRect(0, 0, W, H);
-  ctx.restore();
 
-  // 2) Draw the number as a "guide" background (light blue outline + fill)
+  // 2) Draw the guide number (light blue fill + outline)
   ctx.save();
   ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-  ctx.font = `900 ${fontSize}px 'Galada', 'Hind Siliguri', serif`;
-  ctx.textAlign = 'center';
-  ctx.textBaseline = 'middle';
+  ctx.font = `900 ${layout.fontSize}px 'Galada', 'Hind Siliguri', serif`;
+  ctx.textAlign = 'left';
+  ctx.textBaseline = 'alphabetic';
+  ctx.lineJoin = 'round';
+  ctx.lineCap = 'round';
+
+  // Soft filled number
   ctx.fillStyle = '#e0f2fe';
-  ctx.fillText(numText, cx, cy);
-  ctx.lineWidth = 4;
+  ctx.fillText(numText, layout.x, layout.y);
+
+  // Outline
+  ctx.lineWidth = 3;
   ctx.strokeStyle = '#7dd3fc';
-  ctx.strokeText(numText, cx, cy);
+  ctx.strokeText(numText, layout.x, layout.y);
+
+  // Dashed center guide (subtle)
+  ctx.setLineDash([6, 8]);
+  ctx.lineWidth = 1.5;
+  ctx.strokeStyle = '#bae6fd';
+  ctx.strokeText(numText, layout.x, layout.y);
+  ctx.setLineDash([]);
+
   ctx.restore();
 
-  // 3) Build masked strokes into tmpCanvas:
+  // 3) Build masked strokes into tmpCanvas
   //    a) copy raw strokes
-  //    b) apply number as mask (destination-in)
-  tmpCtx.save();
   tmpCtx.setTransform(1, 0, 0, 1, 0, 0);
   tmpCtx.clearRect(0, 0, W, H);
   tmpCtx.drawImage(strokeCanvas, 0, 0);
-  // Apply the number mask
-  tmpCtx.globalCompositeOperation = 'destination-in';
-  tmpCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
-  tmpCtx.font = `900 ${fontSize}px 'Galada', 'Hind Siliguri', serif`;
-  tmpCtx.textAlign = 'center';
-  tmpCtx.textBaseline = 'middle';
-  tmpCtx.fillStyle = '#000';
-  tmpCtx.fillText(numText, cx, cy);
-  tmpCtx.restore();
 
-  // 4) Draw masked strokes onto visible canvas
-  ctx.save();
+  //    b) apply number as mask via destination-in
+  tmpCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  tmpCtx.globalCompositeOperation = 'destination-in';
+  tmpCtx.font = `900 ${layout.fontSize}px 'Galada', 'Hind Siliguri', serif`;
+  tmpCtx.textAlign = 'left';
+  tmpCtx.textBaseline = 'alphabetic';
+  tmpCtx.fillStyle = '#000';
+  // Use SAME x,y so mask aligns exactly with guide
+  tmpCtx.fillText(numText, layout.x, layout.y);
+  tmpCtx.globalCompositeOperation = 'source-over';
+
+  // 4) Composite masked strokes onto visible canvas
   ctx.setTransform(1, 0, 0, 1, 0, 0);
   ctx.drawImage(tmpCanvas, 0, 0);
-  ctx.restore();
 }
 
 function clearTrace(){
@@ -1303,16 +1388,13 @@ function clearTrace(){
   s.strokeCtx.restore();
   renderTraceCanvas();
 }
+
 function traceStrokeColor(c){
   if(traceState) traceState.strokeColor = c;
-  // Highlight selected color
-  document.querySelectorAll('.trace-color-btn').forEach(b => {
-    b.classList.remove('ring-4','ring-purple-400','scale-125');
-  });
-  const btn = document.querySelector(`.trace-color-btn[data-c="${c}"]`);
-  if(btn) btn.classList.add('ring-4','ring-purple-400','scale-125');
+  updateColorButtons();
   playSound('click');
 }
+
 function prevTrace(){
   if(!traceState) return;
   traceState.currentN = traceState.currentN > 1 ? traceState.currentN - 1 : 20;
@@ -1335,6 +1417,56 @@ function checkTrace(){
   checkBadges();
   setTimeout(() => nextTrace(), 1500);
 }
+
+/* Handle window resize for trace canvas */
+window.addEventListener('resize', () => {
+  if(!traceState) return;
+  if(document.getElementById('section-trace').classList.contains('active')){
+    clearTimeout(traceResizeTimer);
+    traceResizeTimer = setTimeout(() => {
+      // Redraw with new dimensions; user's strokes are kept by re-using strokeCanvas content
+      // (we simply re-size canvases and re-render)
+      const canvas = document.getElementById('traceCanvas');
+      const wrap = document.getElementById('traceCanvasWrap');
+      if(!canvas || !wrap) return;
+      const rect = wrap.getBoundingClientRect();
+      const dpr = window.devicePixelRatio || 1;
+      const displayW = Math.max(200, rect.width || 320);
+      const displayH = Math.max(200, rect.height || displayW);
+
+      // Save old strokes bitmap
+      const oldStroke = document.createElement('canvas');
+      oldStroke.width = traceState.strokeCanvas.width;
+      oldStroke.height = traceState.strokeCanvas.height;
+      oldStroke.getContext('2d').drawImage(traceState.strokeCanvas, 0, 0);
+
+      canvas.width = Math.floor(displayW * dpr);
+      canvas.height = Math.floor(displayH * dpr);
+      canvas.style.width = displayW + 'px';
+      canvas.style.height = displayH + 'px';
+
+      traceState.dpr = dpr;
+      traceState.displayW = displayW;
+      traceState.displayH = displayH;
+
+      traceState.strokeCanvas.width = canvas.width;
+      traceState.strokeCanvas.height = canvas.height;
+      const sCtx = traceState.strokeCanvas.getContext('2d');
+      sCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      sCtx.lineCap = 'round';
+      sCtx.lineJoin = 'round';
+      traceState.strokeCtx = sCtx;
+      // Note: existing strokes are lost on resize for cleanliness.
+      // (Keeps code simple and behavior predictable.)
+
+      traceState.tmpCanvas.width = canvas.width;
+      traceState.tmpCanvas.height = canvas.height;
+      traceState.tmpCtx = traceState.tmpCanvas.getContext('2d');
+
+      renderTraceCanvas();
+    }, 150);
+  }
+});
 
 /* QUIZ */
 function startQuiz(){
